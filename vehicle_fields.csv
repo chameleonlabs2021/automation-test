@@ -1,0 +1,19 @@
+title,name,width,type,values,switch,data
+vehicle_type,Vehicle Type,3,select,"[""Car"", ""SUV"", ""Pickup"", ""Motorcycle""]",Yes,Car
+body_style,Body Style,3,select,"[""2 door"", ""4 door""]",Yes,2 door
+motorcycle_cc,CC,3,number,,No,1200
+vin,Vehicle Identification Number (eg  2HGEJ6526VH515413  ),,string,,Yes,2HGEJ6526VH515413
+year,Vehicle Year,3,string,,Yes,2014
+make,Vehicle Make,3,string,,Yes,honda
+model,Vehicle Model,3,string,,Yes,civic
+vehicle_value,Vehicle Value,3,number,,Yes,12000
+unrepaired_damage,Unrepaired Damage,3,select,"[""No - Existing Damage"", ""Yes - Existing Damage""]",Yes,No - Existing Damage
+ownership_indicator,Ownership Indicator,3,select,"[""Owned - Not Financed"", ""Owned - Financed"", ""Leased""]",Yes,Owned - Not Financed
+vehicle_plated_state,Licensed State,3,select,"[""AL"", ""AK"", ""AZ"", ""AR"", ""CA"", ""CO"", ""CT"", ""DE"", ""FL"", ""GA"", ""HI"", ""ID"", ""IL"", ""IN"", ""IA"", ""KS"", ""KY"", ""LA"", ""ME"", ""MD"", ""MA"", ""MI"", ""MN"", ""MS"", ""MO"", ""MT"", ""NE"", ""NV"", ""NH"", ""NJ"", ""NY"", ""NC"", ""ND"", ""OH"", ""OK"", ""OR"", ""PA"", ""RI"", ""SC"", ""SD"", ""TN"", ""TX"", ""UT"", ""VT"", ""VA"", ""WA"", ""WV"", ""WI"", ""WY""]",Yes,CA
+license_plate,License Plate Number,3,string,,Yes,cvz941
+annual_miles,Annual Miles,3,number,,Yes,120000
+primary_vehicle_use,Primary Vehicle Use,3,select,"[""Pleasure Only"", ""Drive to Work / School"", ""Business - Sales - Artisan"", ""Farm""]",Yes,Pleasure Only
+travel_radius,Travel Radius,3,select,"[""Less than 10 Miles"", ""Between 11 to 20 Miles"", ""Over 20 Miles""]",Yes,Less than 10 Miles
+travel_radius_farm,Radius,3,select,"[""Within 150 miles of Farm"", ""Intra State"", ""Multiple States""]",Yes,Within 150 miles of Farm
+distance_to_work_school,Distance One Way,3,select,"[""Less than 10 Miles"", ""Between 11 to 20 Miles"",Yes, ""Over 20 Miles""]",Less than 10 Miles
+vehicle_photos,Vehicle VIN and Pre-Insurance Documentation ,12,media,No,

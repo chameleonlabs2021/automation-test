@@ -1,0 +1,17 @@
+name,title,type,values,switch,data
+First Name *,first_name,string,,Yes,John
+Last Name *,last_name,string,,Yes,Terry
+Email,email,string,,Yes,JohnTerry@gmail.com
+Phone number,phone_number,string,,Yes,123489092
+Date of Birth Format: yyyy/mm/dd,date_of_birth,date,,Yes,2010/12/13
+Custom Member ID *,custom_member_id,string,,Yes,123456
+Stripe publishable key,stripe_publishable_key,string,,Yes,
+Stripe customer ID,stripe_customer_id,string,,Yes,
+Ofac Outcome,ofac_outcome,select,"[""approved"", ""step up""]",Yes,approved
+Ofac Reason,ofac_reason,string,,Yes,
+Ofac Date,ofac_date,string,,Yes,
+Stripe source ID,stripe_source_id,string,,Yes,
+Stripe source ID_2,stripe_source_id_2,string,,Yes,
+Stripe source ID_3,stripe_source_id_3,string,,Yes,
+Stripe source ID_4,stripe_source_id_4,string,,Yes,
+Stripe source ID_5,stripe_source_id_5,string,,Yes,
