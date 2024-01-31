@@ -1,0 +1,299 @@
+{
+	"documents": [
+		{
+			"displayName": "Invoice",
+			"fileName": "invoice.pdf",
+			"templateName": "invoice.template.liquid",
+			"generatingEvent": "issue",
+			"type": "pdf",
+			"pageLayout": {}
+		}
+	],
+	"defaultPaymentTerms": {
+		"amount": 2,
+		"unit": "day"
+	},
+	"paymentSchedules": [
+		{
+			"type": "total",
+			"name": "upfront",
+			"displayName": "Upfront"
+		},
+		{
+			"type": "monthly",
+			"name": "monthly",
+			"displayName": "Monthly"
+		}
+	],
+	"plugins": {
+		"createInstallments": {
+			"path": "main/installments.js",
+			"enabled": true
+		},
+		"getProrationResult": {
+			"path": "main/prorater.js",
+			"enabled": true
+		},
+		"getDataAutofill": {
+			"path": "main/dataAutofill.js",
+			"enabled": true
+		},
+		"getUnderwritingResult": {
+			"enabled": true,
+			"path": "main/underwriter.js"
+		},
+		"getPreGraceResult": {
+			"enabled": false,
+			"path": "main/preGrace.js"
+		},
+		"getPerilRates": {
+			"path": "main/rater.js",
+			"enabled": true
+		}
+	},
+	"searchSummary": [
+		"custom_policy_number",
+		"non_primary_name",
+		"address_line_1",
+		"address_line_2",
+		"address_city",
+		"address_state",
+		"address_address_zip",
+		"address_county",
+		"building_id",
+		"sfdc_property_id_at_purchase",
+		"addl_interest_name"
+	],
+	"reminders": {
+		"enabled": true,
+		"from": "policy.end",
+		"name": "JD Automated Renewal",
+		"offset": "-7d"
+	},
+	"externalRater": "JD-coherent-rater-0-7-0",
+	"fields": [
+		{
+			"title": "Rater source",
+			"name": "rater_source",
+			"type": "string",
+			"optional": true
+		},
+		{
+			"title": "Rater ID",
+			"name": "rater_id",
+			"type": "string",
+			"optional": true
+		},
+		{
+			"title": "Custom Policy Number",
+			"name": "custom_policy_number",
+			"type": "string",
+			"search": "text"
+		},
+		{
+			"title": "Credit Score",
+			"name": "credit_score",
+			"type": "string"
+		},
+		{
+			"title": "Non Primary Policyholders",
+			"name": "non_primary_policy_holders",
+			"type": "group",
+			"fields": [
+				{
+					"title": "Full name",
+					"name": "non_primary_name",
+					"type": "string",
+					"search": "text"
+				},
+				{
+					"title": "Email",
+					"name": "non_primary_email",
+					"type": "email"
+				},
+				{
+					"title": "Phone number",
+					"name": "non_primary_phone",
+					"type": "string",
+					"optional": true
+				},
+				{
+					"title": "Date of Birth",
+					"name": "non_primary_dob",
+					"type": "date",
+					"precision": "day",
+					"showCalendar": true,
+					"optional": true
+				},
+				{
+					"title": "Jetty Member ID",
+					"name": "non_primary_custom_member_id",
+					"type": "string",
+					"optional": true
+				},
+				{
+					"title": "Relationship to client",
+					"name": "non_primary_relationship",
+					"type": "string",
+					"optional": true
+				}
+			],
+			"repeatable": true,
+			"optional": true
+		},
+		{
+			"title": "Building Details",
+			"name": "building_details",
+			"type": "group",
+			"fields": [
+				{
+					"title": "Address Line 1",
+					"name": "address_line_1",
+					"type": "string",
+					"search": "text"
+				},
+				{
+					"title": "Address Line 2",
+					"name": "address_line_2",
+					"type": "string",
+					"optional": true,
+					"search": "text"
+				},
+				{
+					"title": "Address City",
+					"name": "address_city",
+					"type": "string",
+					"search": "text"
+				},
+				{
+					"title": "Address State",
+					"name": "address_state",
+					"type": "lookup",
+					"table": "states"
+				},
+				{
+					"title": "Address Zip",
+					"name": "address_zip",
+					"type": "string",
+					"search": "text"
+				},
+				{
+					"title": "County",
+					"name": "address_county",
+					"type": "string",
+					"optional": true,
+					"search": "text"
+				},
+				{
+					"title": "Building Id",
+					"name": "building_id",
+					"type": "string",
+					"optional": true,
+					"search": "text"
+				},
+				{
+					"title": "SFDC property ID at purchase",
+					"name": "sfdc_property_id_at_purchase",
+					"type": "string",
+					"optional": true,
+					"search": "text"
+				}
+			]
+		},
+		{
+			"title": "Additional Interests",
+			"name": "addl_interests",
+			"type": "group",
+			"optional": true,
+			"fields": [
+				{
+					"title": "Additional Interest Name",
+					"name": "addl_interest_name",
+					"type": "string",
+					"search": "text"
+				},
+				{
+					"title": "Additional Interest Email",
+					"name": "addl_interest_email",
+					"type": "string",
+					"search": "text",
+					"optional": true
+				},
+				{
+					"title": "Address Line 1",
+					"name": "addl_interest_address_line_1",
+					"type": "string",
+					"optional": true,
+					"search": "text"
+				},
+				{
+					"title": "Address Line 2",
+					"name": "addl_interest_address_line_2",
+					"type": "string",
+					"optional": true,
+					"search": "text"
+				},
+				{
+					"title": "Address City",
+					"name": "addl_interest_address_city",
+					"type": "string",
+					"optional": true,
+					"search": "text"
+				},
+				{
+					"title": "Address State",
+					"name": "addl_interest_address_state",
+					"optional": true,
+					"type": "lookup",
+					"table": "states"
+				},
+				{
+					"title": "Address Zip",
+					"name": "addl_interest_address_zip",
+					"type": "string",
+					"optional": true,
+					"search": "text"
+				}
+			],
+			"repeatable": true
+		},
+		{
+			"title": "Policy Term",
+			"name": "policy_term",
+			"type": "number"
+		},
+		{
+			"title": "Auto Renewal Status",
+			"name": "auto_renewal_status",
+			"type": "select",
+			"values": [
+				"renew",
+				"non-renewal"
+			]
+		},
+		{
+			"title": "Policy re-written?",
+			"name": "rewritten",
+			"type": "select",
+			"values": [
+				"true",
+				"false"
+			],
+			"optional": true
+		},
+		{
+			"title": "Previous Policy Locator",
+			"name": "previous_policy_locator",
+			"type": "string",
+			"search": "text",
+			"optional": true
+		},
+		{
+			"title": "Previous Policy Start Date",
+			"name": "previous_policy_start_date",
+			"type": "number",
+			"search": "text",
+			"optional": true
+		}
+	]
+}

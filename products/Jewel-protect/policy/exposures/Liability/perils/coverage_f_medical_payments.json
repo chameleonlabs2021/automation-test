@@ -1,0 +1,12 @@
+{
+  "name": "coverage_f_medical_payments",
+  "displayName": "Coverage F - Medical payments",
+  "fields": [
+    {
+      "title": "Coverage F - Medical payments Limit",
+      "name": "coverage_f_medical_payments_limit",
+      "type": "number",
+      "optional": true
+    }
+  ]
+}

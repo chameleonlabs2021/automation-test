@@ -1,0 +1,9 @@
+{
+  "fees": [
+    {
+      "name": "installment_fee",
+      "displayName": "Installment Fee",
+			"proration": "flat"
+    }
+  ]
+}

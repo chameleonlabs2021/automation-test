@@ -1,0 +1,12 @@
+{
+	"name": "il_mine_subsidence",
+	"displayName": "Il mine subsidence",
+	"fields": [
+		{
+			"title": "Il mine subsidence Limit",
+			"name": "il_mine_subsidence_limit",
+			"type": "number",
+			"optional": true
+		}
+	]
+}

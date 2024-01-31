@@ -1,0 +1,9 @@
+{
+  "leftText": "{{first_name}}",
+  "rightText": "{{last_name}}",
+  "fields": [
+    "email",
+    "phone_number",
+    "custom_member_id"
+  ]
+}

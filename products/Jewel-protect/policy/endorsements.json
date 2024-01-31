@@ -1,0 +1,34 @@
+{
+	"endorsements": [
+		{
+			"name": "endorsement.without.repricing",
+			"displayName": "Endorsement without repricing",
+			"reprice": "never",
+			"documents": [
+				{
+					"displayName": "Endorsement",
+					"fileName": "endorsement",
+					"templateName": "endorsement.template.liquid",
+					"generatingEvent": "accept",
+					"type": "pdf",
+					"pageLayout": {}
+				}
+			]
+		},
+		{
+			"name": "endorsement.with.repricing",
+			"displayName": "Endorsement with repricing",
+			"reprice": "always",
+			"documents": [
+				{
+					"displayName": "Endorsement",
+					"fileName": "endorsement",
+					"templateName": "endorsement.template.liquid",
+					"generatingEvent": "accept",
+					"type": "pdf",
+					"pageLayout": {}
+				}
+			]
+		}
+	]
+}

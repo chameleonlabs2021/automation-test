@@ -1,0 +1,22 @@
+{
+  "fields": [
+    {
+      "name": "stripe_payment_id",
+      "title": "Stripe Payment ID",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "name": "stripe_source_id",
+      "title": "Stripe Source ID",
+      "type": "string",
+      "optional": false
+    },
+    {
+      "name": "original_payment_timestamp",
+      "title": "Original Payment Date",
+      "type": "number",
+      "optional": true
+    }
+  ]
+}

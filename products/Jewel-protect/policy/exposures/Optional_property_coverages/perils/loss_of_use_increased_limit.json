@@ -1,0 +1,12 @@
+{
+  "name": "loss_of_use_increased_limit",
+  "displayName": "Loss of use increased limit",
+  "fields": [
+    {
+      "title": "Loss of use increased Limit Limit",
+      "name": "loss_of_use_increased_limit_limit",
+      "type": "number",
+      "optional": true
+    }
+  ]
+}

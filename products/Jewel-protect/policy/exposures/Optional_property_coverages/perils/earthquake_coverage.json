@@ -1,0 +1,12 @@
+{
+  "name": "earthquake_coverage",
+  "displayName": "Earthquake coverage",
+  "fields": [
+    {
+      "title": "Earthquake coverage Limit",
+      "name": "earthquake_coverage_limit",
+      "type": "number",
+      "optional": true
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "pages": [
+    {
+      "sections": [
+        {
+          "title": "Primary Policyholder",
+          "fields": [
+            {
+              "name": "first_name",
+              "prompt": "First Name",
+              "required": true,
+              "updateable": true,
+              "width": 4
+            },
+            {
+              "name": "last_name",
+              "prompt": "Last Name",
+              "required": true,
+              "updateable": true,
+              "width": 4
+            },
+            {
+              "name": "email",
+              "prompt": "Email",
+              "required": false,
+              "updateable": true,
+              "width": 4
+            },
+            {
+              "name": "phone_number",
+              "prompt": "Phone number",
+              "required": false,
+              "updateable": true,
+              "width": 4
+            },
+            {
+              "name": "date_of_birth",
+              "prompt": "Date of Birth",
+              "required": false,
+              "updateable": true,
+              "width": 4
+            },
+            {
+              "name": "custom_member_id",
+              "prompt": "Custom Member ID",
+              "required": true,
+              "updateable": true,
+              "width": 4,
+              "newline": true
+            },
+            {
+              "name": "stripe_publishable_key",
+              "prompt": "Stripe publishable key",
+              "required": false,
+              "updateable": true,
+              "width": 4
+            },
+            {
+              "name": "stripe_customer_id",
+              "prompt": "Stripe customer ID",
+              "required": false,
+              "updateable": true,
+              "width": 4
+            },
+            {
+              "name": "ofac_outcome",
+              "prompt": "Ofac Outcome",
+              "required": false,
+              "updateable": true,
+              "width": 4
+            },
+            {
+              "name": "ofac_reason",
+              "prompt": "Ofac Reason",
+              "required": false,
+              "updateable": true,
+              "width": 4
+            },
+            {
+              "name": "ofac_date",
+              "prompt": "Ofac Date",
+              "required": false,
+              "updateable": true,
+              "width": 4
+            },
+            {
+              "name": "stripe_source_id",
+              "prompt": "Stripe source ID",
+              "required": false,
+              "updateable": true,
+              "width": 4
+            },
+            {
+              "name": "stripe_source_id_2",
+              "prompt": "Stripe source ID_2",
+              "required": false,
+              "updateable": true,
+              "width": 4
+            },
+            {
+              "name": "stripe_source_id_3",
+              "prompt": "Stripe source ID_3",
+              "required": false,
+              "updateable": true,
+              "width": 4
+            },
+            {
+              "name": "stripe_source_id_4",
+              "prompt": "Stripe source ID_4",
+              "required": false,
+              "updateable": true,
+              "width": 4
+            },
+            {
+              "name": "stripe_source_id_5",
+              "prompt": "Stripe source ID_5",
+              "required": false,
+              "updateable": true,
+              "width": 4
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

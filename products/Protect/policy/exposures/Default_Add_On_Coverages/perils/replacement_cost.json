@@ -1,0 +1,16 @@
+{
+	"name": "replacement_cost",
+	"displayName": "Replacement cost",
+	"fields": [
+		{
+			"title": "Replacement cost",
+			"name": "replacement_cost",
+			"type": "select",
+			"values": [
+                "yes",
+                "no"
+            ],
+			"optional": true
+		}
+	]
+}

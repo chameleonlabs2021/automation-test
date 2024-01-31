@@ -1,0 +1,14 @@
+{
+    "hostname": "rpoolanchalil-synpulse-configeditor.co.sandbox.socotra.com",
+    "username": "alice.lee",
+    "password": "socotra",
+    "num_policyholders": 1,
+    "num_policy": 1,
+    "sandbox_url": "https://api.sandbox.socotra.com",
+    "locator_url": "https://sandbox.socotra.com",
+    "login_url": "https://sandbox.socotra.com/login",
+    "policyholder_form_json": "policyholder/policyholder.form.json",
+    "policy_form_json":"policy/policy.json/policy.json",
+    "csv_output_file": "test_results.csv",
+    "num_records": 1
+}

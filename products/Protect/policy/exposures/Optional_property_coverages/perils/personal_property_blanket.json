@@ -1,0 +1,12 @@
+{
+  "name": "personal_property_blanket",
+  "displayName": "Personal property blanket",
+  "fields": [
+    {
+      "title": "Personal property blanket Limit",
+      "name": "personal_property_blanket_limit",
+      "type": "number",
+      "optional": true
+    }
+  ]
+}

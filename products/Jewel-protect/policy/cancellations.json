@@ -1,0 +1,102 @@
+{
+	"cancellationTypes": [
+		{
+			"name": "expired",
+			"title": "Expired",
+			"documents": [
+				{
+					"displayName": "Notice of Cancellation",
+					"fileName": "cancellation.pdf",
+					"templateName": "cancellation.template.liquid"
+				}
+			],
+			"cancellationCategories": [
+				"Claim Eligible"
+			]
+		},
+		{
+			"name": "canceled_by_member",
+			"title": "Canceled by member",
+			"documents": [
+				{
+					"displayName": "Notice of Cancellation",
+					"fileName": "cancellation.pdf",
+					"templateName": "cancellation.template.liquid"
+				}
+			],
+			"cancellationCategories": [
+				"Claim Eligible"
+			]
+		},
+		{
+			"name": "canceled_for_non_payment_of_premium",
+			"title": "Canceled for non-payment of premium",
+			"documents": [
+				{
+					"displayName": "Notice of Cancellation",
+					"fileName": "cancellation.pdf",
+					"templateName": "cancellation.template.liquid"
+				}
+			],
+			"cancellationCategories": [
+				"Claim Eligible"
+			]
+		},
+		{
+			"name": "cancel_flat",
+			"title": "Canceled flat",
+			"documents": [
+				{
+					"displayName": "Notice of Cancellation",
+					"fileName": "cancellation.pdf",
+					"templateName": "cancellation.template.liquid"
+				}
+			],
+			"cancellationCategories": [
+				"Claim Not Eligible"
+			]
+		},
+		{
+			"name": "cancel_flat_rewrite",
+			"title": "Canceled flat - Rewrite",
+			"documents": [
+				{
+					"displayName": "Notice of Cancellation",
+					"fileName": "cancellation.pdf",
+					"templateName": "cancellation.template.liquid"
+				}
+			],
+			"cancellationCategories": [
+				"Claim Not Eligible"
+			]
+		},
+		{
+			"name": "fraud",
+			"title": "Fraud",
+			"documents": [
+				{
+					"displayName": "Notice of Cancellation",
+					"fileName": "cancellation.pdf",
+					"templateName": "cancellation.template.liquid"
+				}
+			],
+			"cancellationCategories": [
+				"Claim Not Eligible"
+			]
+		},
+		{
+			"name": "other",
+			"title": "Other",
+			"documents": [
+				{
+					"displayName": "Notice of Cancellation",
+					"fileName": "cancellation.pdf",
+					"templateName": "cancellation.template.liquid"
+				}
+			],
+			"cancellationCategories": [
+				"Claim Not Eligible"
+			]
+		}
+	]
+}

@@ -1,0 +1,5 @@
+{% assign policy_v = data.policy.characteristics[0].field_values %}
+{% assign exposure_v = data.policy.exposures[0].characteristics[0].field_values %}
+
+{{ "accept" | set_underwriting_decision }}
+

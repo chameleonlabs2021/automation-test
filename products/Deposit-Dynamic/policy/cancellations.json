@@ -1,0 +1,116 @@
+{
+	"cancellationTypes": [
+		{
+			"name": "mid_lease",
+			"title": "Mid Lease",
+			"documents": [
+				{
+					"displayName": "Notice of Cancellation",
+					"fileName": "cancellation.pdf",
+					"templateName": "cancellation.template.liquid"
+				}
+			],
+			"cancellationCategories": [
+				"Claim Eligible"
+			]
+		},
+		{
+			"name": "moveout",
+			"title": "Moveout",
+			"documents": [
+				{
+					"displayName": "Notice of Cancellation",
+					"fileName": "cancellation.pdf",
+					"templateName": "cancellation.template.liquid"
+				}
+			],
+			"cancellationCategories": [
+				"Claim Eligible"
+			]
+		},
+		{
+			"name": "cancel_flat",
+			"title": "Cancel Flat - General",
+			"documents": [
+				{
+					"displayName": "Notice of Cancellation",
+					"fileName": "cancellation.pdf",
+					"templateName": "cancellation.template.liquid"
+				}
+			],
+			"cancellationCategories": [
+				"Claim Not Eligible"
+			]
+		},		
+		{
+			"name": "cancel_flat_rewrite",
+			"title": "Cancel Flat - Rewrite",
+			"documents": [
+				{
+					"displayName": "Notice of Cancellation",
+					"fileName": "cancellation.pdf",
+					"templateName": "cancellation.template.liquid"
+				}
+			],
+			"cancellationCategories": [
+				"Claim Not Eligible"
+			]
+		},		
+		{ 
+			"name": "lease_not_signed",
+			"title": "Lease not signed",
+			"documents": [
+				{
+					"displayName": "Notice of Cancellation",
+					"fileName": "cancellation.pdf",
+					"templateName": "cancellation.template.liquid"
+				}
+			],
+			"cancellationCategories": [
+				"Claim Not Eligible"
+			]
+		},		
+		{
+			"name": "cash_deposit_posted",
+			"title": "Cash Deposit Posted",
+			"documents": [
+				{
+					"displayName": "Notice of Cancellation",
+					"fileName": "cancellation.pdf",
+					"templateName": "cancellation.template.liquid"
+				}
+			],
+			"cancellationCategories": [
+				"Claim Not Eligible"
+			]
+		},		
+		{
+			"name": "fraud",
+			"title": "Fraud",
+			"documents": [
+				{
+					"displayName": "Notice of Cancellation",
+					"fileName": "cancellation.pdf",
+					"templateName": "cancellation.template.liquid"
+				}
+			],
+			"cancellationCategories": [
+				"Claim Not Eligible"
+			]
+		},		
+		{
+			"name": "other",
+			"title": "Other",
+			"documents": [
+				{
+					"displayName": "Notice of Cancellation",
+					"fileName": "cancellation.pdf",
+					"templateName": "cancellation.template.liquid"
+				}
+			],
+			"cancellationCategories": [
+				"Claim Not Eligible"
+			]
+		}
+	]
+}

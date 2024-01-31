@@ -1,0 +1,37 @@
+{
+  "name": "sporting_equipment_except_bicycles",
+  "displayName": "Sporting Equipment (Except Bicycles)",
+  "fields": [
+    {
+      "title": "Sporting equipment except bicycles limit",
+      "name": "sporting_equipment_except_bicycles_limit",
+      "type": "number",
+      "optional": true
+    },
+    {
+      "title": "Sporting equipment except bicycles schedule items",
+      "name": "sporting_equipment_except_bicycles_schedule_items",
+      "type": "group",
+      "fields": [
+    {
+      "title": "Limit",
+      "name": "limit",
+      "type": "number"
+    },
+    {
+      "title": "Item",
+      "name": "item",
+      "type": "string"
+    },
+    {
+      "title": "Notes",
+      "name": "notes",
+      "type": "string",
+      "optional": true
+    }
+    ],
+    "repeatable": true,
+    "optional": true
+  }
+  ]
+}

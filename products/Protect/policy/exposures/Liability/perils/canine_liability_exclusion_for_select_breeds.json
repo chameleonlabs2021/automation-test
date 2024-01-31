@@ -1,0 +1,16 @@
+{
+	"name": "canine_liability_exclusion_for_select_breeds",
+	"displayName": "Canine liability exclusion for select breeds",
+	"fields": [
+		{
+			"title": "Canine liability exclusion for select breeds",
+			"name": "canine_liability_exclusion_for_select_breeds",
+			"type": "select",
+			"values": [
+                "yes",
+                "no"
+            ],
+			"optional": true
+		}
+	]
+}

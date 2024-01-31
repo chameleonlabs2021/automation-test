@@ -1,0 +1,12 @@
+{
+  "name": "occasional_rental_to_others_theft_extension",
+  "displayName": "Occasional Rental to Others Theft Extension",
+  "fields": [
+    {
+      "title": "Occasional Rental to Others Theft Extension Limit",
+      "name": "occasional_rental_to_others_theft_extension_limit",
+      "type": "number",
+      "optional": true
+    }
+  ]
+}

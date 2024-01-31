@@ -1,0 +1,12 @@
+{
+	"name": "personal_electronics_blanket",
+	"displayName": "Personal electronics blanket",
+	"fields": [
+		{
+			"title": "Personal electronics blanket Limit",
+			"name": "personal_electronics_blanket_limit",
+			"type": "number",
+			"optional": true
+		}
+	]
+}

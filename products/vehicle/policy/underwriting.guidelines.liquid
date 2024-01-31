@@ -1,0 +1,21 @@
+{% assign basePremium = 1000 %}
+
+{% if driver_age < 25 %}
+  {% assign additionalPremium = 500 %}
+{% else %}
+  {% assign additionalPremium = 0 %}
+{% endif %}
+
+{% if vehicle_value > 50000 %}
+  {% assign additionalPremium = additionalPremium | plus: 1000 %}
+{% endif %}
+
+{% if driver_history == 'clean' %}
+  {% assign discount = 200 %}
+{% else %}
+  {% assign discount = 0 %}
+{% endif %}
+
+{% assign premium = basePremium | plus: additionalPremium | minus: discount %}
+
+{{ "Premium for the policy: $" | append: premium }}

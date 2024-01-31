@@ -1,0 +1,37 @@
+{
+  "name": "musical_instruments_and_equipment",
+  "displayName": "Musical Instruments and Equipment",
+  "fields": [
+    {
+      "title": "Musical instruments and equipment limit schedule items",
+      "name": "musical_instruments_and_equipment_limit_schedule_items",
+      "type": "number",
+      "optional": true
+    },
+    {
+      "title": "Musical instruments and equipment schedule items",
+      "name": "musical_instruments_and_equipment_schedule_items",
+      "type": "group",
+      "fields": [
+    {
+      "title": "Limit",
+      "name": "limit",
+      "type": "number"
+    },
+    {
+      "title": "Item",
+      "name": "item",
+      "type": "string"
+    },
+    {
+      "title": "Notes",
+      "name": "notes",
+      "type": "string",
+      "optional": true
+    }
+    ],
+    "repeatable": true,
+    "optional": true
+  }
+  ]
+}

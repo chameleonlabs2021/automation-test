@@ -1,0 +1,12 @@
+{
+  "name": "hurricane_deductible",
+  "displayName": "Hurricane Deductible",
+  "fields": [
+    {
+      "title": "Hurricane Deductible Limit",
+      "name": "hurricane_deductible_limit",
+      "type": "number",
+      "optional": true
+    }
+  ]
+}

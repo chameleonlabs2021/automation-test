@@ -1,0 +1,9 @@
+{
+    "searchSummary": [
+        "first_name",
+        "last_name",
+        "email",
+        "phone_number",
+        "custom_member_id"
+    ]
+   }

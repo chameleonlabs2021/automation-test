@@ -1,0 +1,37 @@
+{
+  "name": "art_and_design",
+  "displayName": "Art and Design",
+  "fields": [
+    {
+      "title": "Art and Design Limit",
+      "name": "art_and_design_limit",
+      "type": "number",
+      "optional": true
+    },
+    {
+      "title": "Art and Design schedule items",
+      "name": "art_and_design_schedule_items",
+      "type": "group",
+      "fields": [
+        {
+          "title": "Limit",
+          "name": "limit",
+          "type": "number"
+        },
+        {
+          "title": "Item",
+          "name": "item",
+          "type": "string"
+        },
+        {
+          "title": "Notes",
+          "name": "notes",
+          "type": "string",
+          "optional": true
+        }
+      ],
+      "repeatable": true,
+      "optional": true
+    }
+  ]
+}

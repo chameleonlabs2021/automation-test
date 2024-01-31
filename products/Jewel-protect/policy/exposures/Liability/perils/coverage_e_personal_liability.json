@@ -1,0 +1,12 @@
+{
+  "name": "coverage_e_personal_liability",
+  "displayName": "Coverage E - Personal liability",
+  "fields": [
+    {
+      "title": "Coverage E - Personal liability Limit",
+      "name": "coverage_e_personal_liability_limit",
+      "type": "number",
+      "optional": true
+    }
+  ]
+}

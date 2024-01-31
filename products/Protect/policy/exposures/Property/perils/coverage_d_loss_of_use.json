@@ -1,0 +1,12 @@
+{
+  "name": "coverage_d_loss_of_use",
+  "displayName": "Coverage D - Loss of use",
+  "fields": [
+    {
+      "title": "Coverage D - Loss of use Limit",
+      "name": "coverage_d_loss_of_use_limit",
+      "type": "number",
+      "optional": true
+    }
+  ]
+}

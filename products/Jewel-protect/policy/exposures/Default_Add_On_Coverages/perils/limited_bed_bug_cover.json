@@ -1,0 +1,12 @@
+{
+	"name": "limited_bed_bug_cover",
+	"displayName": "Limited bed bug cover",
+	"fields": [
+		{
+			"title": "Limited bed bug cover Limit",
+			"name": "limited_bed_bug_cover_limit",
+			"type": "number",
+			"optional": true
+		}
+	]
+}

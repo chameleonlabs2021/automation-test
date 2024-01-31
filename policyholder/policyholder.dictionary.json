@@ -1,0 +1,83 @@
+[
+  {
+    "name": "first_name",
+    "type": "string",
+    "search": "text"
+  },
+  {
+    "name": "last_name",
+    "type": "string",
+    "search": "text"
+  },
+  {
+    "name": "email",
+    "type": "email",
+    "search": "text"
+  },
+  {
+    "name": "phone_number",
+    "type": "string",
+    "search": "text"
+  },
+  {
+    "name": "date_of_birth",
+    "type": "date",
+    "precision": "day",
+    "minimum": "1900-01-01",
+    "showCalendar": false,
+    "maximumOffset": {
+      "field": "year",
+      "amount": "-18"
+    }
+  },
+  {
+    "name": "custom_member_id",
+    "type": "string",
+    "search": "text"
+  },
+  {
+    "name": "ofac_outcome",
+    "type": "select",
+    "values": [
+      "approved",
+      "step up"
+    ]
+  },
+  {
+    "name": "ofac_reason",
+    "type": "string",
+    "maximum": 20000
+  },
+  {
+    "name": "ofac_date",
+    "type": "string"
+  },
+  {
+    "name": "stripe_publishable_key",
+    "type": "string"
+  },
+  {
+    "name": "stripe_customer_id",
+    "type": "string"
+  },
+  {
+    "name": "stripe_source_id",
+    "type": "string"
+  },
+  {
+    "name": "stripe_source_id_2",
+    "type": "string"
+  },
+  {
+    "name": "stripe_source_id_3",
+    "type": "string"
+  },
+  {
+    "name": "stripe_source_id_4",
+    "type": "string"
+  },
+  {
+    "name": "stripe_source_id_5",
+    "type": "string"
+  }
+]

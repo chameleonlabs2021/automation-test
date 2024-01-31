@@ -1,0 +1,12 @@
+{
+  "name": "coverage_c_contents",
+  "displayName": "Coverage C - Contents",
+  "fields": [
+    {
+      "title": "Coverage C - Contents Limit",
+      "name": "coverage_c_contents_limit",
+      "type": "number",
+      "optional": true
+    }
+  ]
+}

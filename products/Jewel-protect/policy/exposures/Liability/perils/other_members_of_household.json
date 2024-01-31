@@ -1,0 +1,12 @@
+{
+	"name": "other_members_of_household",
+	"displayName": "Other members of household",
+	"fields": [
+		{
+			"title": "Other members of household limit",
+			"name": "other_members_of_household_limit",
+			"type": "number",
+			"optional": true
+		}
+	]
+}

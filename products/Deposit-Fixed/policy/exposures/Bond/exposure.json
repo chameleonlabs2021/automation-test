@@ -1,0 +1,11 @@
+{
+  "name": "bond",
+  "displayName": "Bond",
+  "fields": [
+    {
+      "title": "Bond Amount",
+      "name": "bond_amount",
+      "type": "number"
+    }
+  ]
+}

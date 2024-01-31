@@ -1,0 +1,37 @@
+{
+  "name": "musical_instruments_and_equipment_for_pay",
+  "displayName": "Musical Instruments and Equipment for Pay",
+  "fields": [
+    {
+      "title": "Musical instruments and equipment for pay limit",
+      "name": "musical_instruments_and_equipment_for_pay_limit",
+      "type": "number",
+      "optional": true
+    },
+    {
+      "title": "Musical instruments and equipment for pay schedule items",
+      "name": "musical_instruments_and_equipment_for_pay_schedule_items",
+      "type": "group",
+      "fields": [
+    {
+      "title": "Limit",
+      "name": "limit",
+      "type": "number"
+    },
+    {
+      "title": "Item",
+      "name": "item",
+      "type": "string"
+    },
+    {
+      "title": "Notes",
+      "name": "notes",
+      "type": "string",
+      "optional": true
+    }
+    ],
+    "repeatable": true,
+    "optional": true
+  }
+  ]
+}
