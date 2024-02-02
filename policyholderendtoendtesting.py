@@ -37,12 +37,18 @@ new_policyholder_dropdown(driver)
 # waiting for overview page to load
 wait.until(is_page_loaded)
 
+
+key_policyholder_form ='/html/body/div[1]/div[2]/div/form/div/div[3]/div/div/div/input'
+list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,scroll_to_location,wait,key_policyholder_form)
+
+policyholder_create_button(driver)
+
 #Read data from csv and fill all fields
-all_fields_successful=load_config( driver,'policyholder.csv')
+# all_fields_successful=load_config( driver,'policyholder.csv',wait)
 
 
 
-def scroll_to_location(type,element):
+def scroll_to_location(driver,type,element):
     print(element)    
     print(type)
     if type == 'ID':
@@ -54,10 +60,10 @@ def scroll_to_location(type,element):
     wait.until(is_scroll_complete)
 
 # Click the "Create" button if all fields were successfully filled
-if all_fields_successful:
-    policyholder_create_button(driver)
-    time.sleep(2)
-    print("Policyholder created successfully")
+# if all_fields_successful:
+#     policyholder_create_button(driver)
+#     time.sleep(2)
+#     print("Policyholder created successfully")
 
 # waiting for overview page to load
 wait.until(is_page_loaded)
@@ -68,10 +74,11 @@ application_type_selector(driver,1)
 wait.until(is_page_loaded)
 
 
+key_policy_form ='/html/body/div[1]/div[2]/main/div/div/div[2]/div/div[2]/section/div/div[2]/div/div/div/div/div/div/input'
+key_exposure_form ='/html/body/div[1]/div[2]/main/div/div/div[2]/div/div[2]/div/button'
 #search all inputs and feild all dropdowns menus randomly
-list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_dropdown_inputs(driver,scroll_to_location,wait,'//*[@id="policyStart"]')
-
-#start and end date setter
+# list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_dropdown_inputs(driver,scroll_to_location,wait,'//*[@id="policyStart"]')
+list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,scroll_to_location,wait,key_policy_form)#start and end date setter
 # datesetter(driver, wait)
 
 # payment schedule selector
@@ -88,10 +95,11 @@ click_link_by_text(driver, "Exposures")
 click_button_by_text(driver, "Add Exposure", "MuiFab-root")
 
 
+
 wait.until(is_page_loaded)
 #search all inputs and feild all dropdowns menus randomly
-list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_dropdown_inputs(driver,scroll_to_location,wait,'/html/body/div[1]/div[2]/main/div/div/div[2]/div/div[2]/div/button')
-
+# list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_dropdown_inputs(driver,scroll_to_location,wait,'/html/body/div[1]/div[2]/main/div/div/div[2]/div/div[2]/div/button')
+list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,scroll_to_location,wait,key_exposure_form)
 #-------- result printing -------------------------------
 print(f"total inputs found :{len(list_of_inputs)}")
 print(f"filled inputs:{failed_inputs}")

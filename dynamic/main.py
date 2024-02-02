@@ -111,15 +111,19 @@ driver.get(policy_holder_url)
 wait.until(is_page_loaded)
 
 #product selector
-application_type_selector(driver,1)
+application_type_selector(driver,6)
+
+
+key_policy_form ='/html/body/div[1]/div[2]/main/div/div/div[2]/div/div[2]/section/div/div[2]/div/div/div/div/div/div/input'
+key_exposure_form ='/html/body/div[1]/div[2]/main/div/div/div[2]/div/div[2]/div/button'
 
 # wait.until(is_page_loaded)
 
 #search all inputs and feild all dropdowns menus randomly
-list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_dropdown_inputs(driver,scroll_to_location,wait)
+list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,scroll_to_location,wait,key_policy_form)
 
 #start and end date setter
-datesetter(driver, wait)
+# datesetter(driver, wait)
 
 # payment schedule selector
 payment_Schedule_Selctor(driver,random.randint(1, 2))

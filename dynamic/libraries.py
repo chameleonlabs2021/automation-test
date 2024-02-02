@@ -16,7 +16,7 @@ fake = Faker()
 
 
 #obselete function
-def _search_and_fill_all_dropdown_inputs(driver,scroll_to_location,wait):
+def _search_and_fill_all_dropdown_inputs(driver,scroll_to_location,wait,):
     create_menu_loading_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.ID,'policyStart')))
     inputlist = driver.find_elements(By.TAG_NAME, 'input')
     listofitems = {}
@@ -56,8 +56,9 @@ def _search_and_fill_all_dropdown_inputs(driver,scroll_to_location,wait):
     return listofitems, items_filled ,multiple_drivers
 
 
-def search_and_fill_all_dropdown_inputs(driver,scroll_to_location,wait):
-    create_menu_loading_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.ID,'policyStart')))
+
+def search_and_fill_all_inputs(driver,scroll_to_location,wait,key):
+    create_menu_loading_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,key)))
     inputlist = driver.find_elements(By.TAG_NAME, 'input')
     listofitems = {}
     failed_inputs = 0
@@ -73,6 +74,12 @@ def search_and_fill_all_dropdown_inputs(driver,scroll_to_location,wait):
             driver.find_element(By.ID,key).click()
             if value == 'list':
                 dropdown_selector(driver,key)
+            elif field_type == 'tel':
+                if key == 'policyStart' or key == 'policyEnd':
+                    datesetter(driver, wait)
+                else:
+                    random_date = fake.date_between(start_date="-365d", end_date="today")
+                    datesetter_generic(driver,wait,key,random_date)
             else:
                 print(f"elif hit")
                 feild_filler(driver,key,field_type)
@@ -143,6 +150,7 @@ def additional_driver_details(driver,driverlicensestate= 3,designation= 2):
     except:
         print('error22')
 
+#obselete
 def datesetter(driver, wait):
       startdate = fake.date_between(start_date='today', end_date='+3y')
       enddate = fake.date_between(start_date='+3y', end_date='+30y')
@@ -164,6 +172,22 @@ def datesetter(driver, wait):
         driver.find_element(By.ID,"policyEnd").send_keys(Keys.RETURN)
       except:
         print()
+
+# generic datesetter
+def datesetter_generic(driver, wait,key,date):
+      print(key,date)
+      try:
+        dummycheck = WebDriverWait(driver, 15).until(EC.presence_of_all_elements_located((By.ID,key)))
+        placeholder = driver.find_element(By.ID,key).get_attribute("placeholder")
+        strptime_format = placeholder.replace('yyyy', '%Y').replace('mm', '%m').replace('dd', '%d').replace('ss','%s').replace('(am|pm)', '%p')
+        driver.find_element(By.ID,key).click()
+        driver.find_element(By.ID,key).send_keys(Keys.CONTROL, 'a')
+        driver.find_element(By.ID,key).send_keys(Keys.DELETE)
+        driver.find_element(By.ID,key).send_keys(date.strftime(strptime_format))
+        driver.find_element(By.ID,key).send_keys(Keys.RETURN)
+      except:
+        print()
+
 
 
 
@@ -247,6 +271,8 @@ def feild_filler(driver,key,field_type):
         elif field_type == "tel":
             random_date = fake.date_time()
             input_feild = driver.find_element(By.ID,key)
+            place_holder = input_feild.get_attribute("placeholder")
+            print(place_holder)
             input_feild.send_keys(random_date.strftime("%Y/%m/%d %I:%M:%S %p"))
             print(f"number feild success {key} ")  
 

@@ -61,7 +61,6 @@ def page_scrolled_to_top(driver):
     return driver.execute_script("return window.scrollY === 0;")
 
 
-
    
 def create_policyholder_button(driver):
     #print("Starting create_policyholder_button function...")
@@ -229,7 +228,6 @@ def click_and_select_by_id_ending_with(driver, end_id, value_to_select):
 
 
 
-
 def set_date_field(driver, title, pattern, date_value, date_format='%Y/%m/%d'):
     #print(f"Starting set_date_field for title: {title}...")
     #print(f"Setting date field {title} with value: {date_value} using pattern: {pattern}")
@@ -304,93 +302,119 @@ def dropdown_selector(driver,key):
         #print(f"Dropdown {key} selection failed")
         pass
 
-
-# Define a dictionary mapping key substrings to faker functions
-key_to_faker = {
-    'first_name': fake.first_name,
-    'last_name': fake.last_name,
-    'address': fake.address,
-    'year': lambda: str(fake.year()),
-    'email': fake.email,
-    'id': fake.uuid4,
-    'phone': fake.phone_number,
-    'tel': fake.phone_number,
-    'date': fake.date,
-    'vin': lambda: '2HGFB2F59EH567890',  # Placeholder for dynamic VIN generation
-    'zip': fake.postcode,
-    'postal': fake.postcode,
-    'country': fake.country,
-    'city': fake.city,
-    'company': fake.company,
-    'title': fake.job,
-    'url': fake.url,
-    'description': lambda: fake.sentence(nb_words=10),
-    'bio': lambda: fake.sentence(nb_words=10)
-}
-
 def generate_dummy_text(key):
     key_lower = key.lower()
-    for substring, faker_func in key_to_faker.items():
-        if substring in key_lower:
-            return faker_func() if callable(faker_func) else faker_func
-    return fake.sentence()  # Default case for unmatched keys
+    if 'name' in key_lower:
+        return fake.name()
+    elif 'address' in key_lower:
+        return fake.address()
+    elif 'year' in key_lower:
+        return fake.year()
+    elif 'email' in key_lower:
+        return fake.email()
+    elif 'id' in key_lower:
+        return fake.uuid4()
+    elif 'phone' in key_lower or 'tel' in key_lower:
+        return fake.phone_number()
+    elif 'date' in key_lower:
+        return fake.date()
+    elif 'vin' in key_lower:
+        # Return your dynamic VIN generation here instead of a hardcoded value
+        return '2HGFB2F59EH567890'  # Placeholder for dynamic VIN
+    elif 'zip' in key_lower or 'postal' in key_lower:
+        return fake.postcode()
+    elif 'country' in key_lower:
+        return fake.country()
+    elif 'city' in key_lower:
+        return fake.city()
+    elif 'description' in key_lower or 'bio' in key_lower:
+        return fake.sentence(nb_words=10)
+    # Add more conditions as needed
+    else:
+        return fake.sentence()  # Default case
     
 def field_filler(driver, key, field_type=None):
-    key_lower = key.lower()  # Lowercase conversion for case-insensitive comparison
-
+    
     try:
-        # Generate text or number based on field_type or key
-        if field_type in ['text', 'email', 'telephone', 'tel'] or 'year' in key_lower:
-            text_to_input = generate_dummy_text(key)
+        key_lower = key.lower()  # Ensure key_lower is defined before using it
+
+        if field_type == 'text':
+            text_to_input = generate_dummy_text(key)  # Use dynamic text based on key
             input_field = driver.find_element(By.ID, key)
             input_field.send_keys(text_to_input)
+            # elif 'name' in key_lower:
+            #     generated_text = generate_dummy_text(key)  # Use dynamic text for other text fields
+            #     input_field = driver.find_element(By.ID, key)
+            #     input_field.send_keys(generated_text)   
+            # elif 'id' in key_lower:
+            #     generated_text = generate_dummy_text(key)  # Use dynamic text for other text fields
+            #     input_field = driver.find_element(By.ID, key)
+            #     input_field.send_keys(generated_text)     
+            # else:
+            #     generated_text = generate_dummy_text(key)  # Use dynamic text for other text fields
+            #     input_field = driver.find_element(By.ID, key)
+            #     input_field.send_keys(generated_text)
         elif field_type == 'number' or 'number' in key_lower:
             input_field = driver.find_element(By.ID, key)
             input_field.send_keys(fake.random_number(digits=5))
+        elif field_type == 'email' or 'email' in key_lower:
+            input_field = driver.find_element(By.ID, key)
+            input_field.send_keys(fake.email())
+        elif field_type in ['telephone', 'phone'] or any(substring in key_lower for substring in ['phone', 'tel', 'hp', 'handphone']):
+            input_field = driver.find_element(By.ID, key)
+            input_field.send_keys(fake.phone_number())
+        elif 'year' in key_lower:
+            input_field = driver.find_element(By.ID, key)
+            input_field.send_keys(str(fake.year()))
+        elif field_type == "tel":
+            random_date = fake.date_time()
+            input_field = driver.find_element(By.ID, key)
+            input_field.send_keys(random_date.strftime("%Y/%m/%d %I:%M:%S %p"))
         else:
             print(f"No specific data type matched for {key}")
     except Exception as e:
-        print(f"Field {key} filling failed: {e}")
+        pass
+        # Print or log the exception if needed
 
 
-def search_and_fill_all_inputs(driver, scroll_to_location, wait, key_xpath):
-    # Ensure elements are loaded
-    WebDriverWait(driver, 15).until(EC.presence_of_all_elements_located((By.XPATH, key_xpath)))
-    
-    input_list = driver.find_elements(By.TAG_NAME, 'input')
-    list_of_items = {}
+def search_and_fill_all_inputs(driver,scroll_to_location,wait,key):
+    create_menu_loading_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,key)))
+    inputlist = driver.find_elements(By.TAG_NAME, 'input')
+    listofitems = {}
     failed_inputs = 0
-    
-    for input_element in input_list:
-        element_id = input_element.get_attribute("id")
-        autocomplete_type = input_element.get_attribute("aria-autocomplete")
+    multiple_drivers = False
+    for input_element in inputlist:
+        key = input_element.get_attribute("id")
+        value = input_element.get_attribute("aria-autocomplete")
         field_type = input_element.get_attribute("type")
-        list_of_items[element_id] = autocomplete_type
-        
+        listofitems[key] = value
+        print(f"{key} : {value}")
         try:
-            # Ensure the element is clickable
-            WebDriverWait(driver, 15).until(EC.element_to_be_clickable((By.ID, element_id)))
-            input_element.click()  # Clicking the element directly
-
-            if autocomplete_type == 'list':
-                dropdown_selector(driver, element_id)
-            elif field_type == 'tel' and element_id in ['policyStart', 'policyEnd']:
-                datesetter(driver, wait)
+            dummycheck = WebDriverWait(driver, 15).until(EC.presence_of_all_elements_located((By.ID,key)))
+            driver.find_element(By.ID,key).click()
+            if value == 'list':
+                dropdown_selector(driver,key)
             elif field_type == 'tel':
-                random_date = fake.date_between(start_date="-30y", end_date="2005-12-31")
-                datesetter_generic(driver, wait, element_id, random_date)
+                if key == 'policyStart' or key == 'policyEnd':
+                    datesetter(driver, wait)
+                else:
+                    # random_date = fake.date_between(start_date="-7365d", end_date="today")
+                    random_date = fake.date_between(start_date="-30y", end_date="2005-12-31")
+
+                    datesetter_generic(driver,wait,key,random_date)
             else:
-                field_filler(driver, element_id, field_type)
-        except Exception as e:
+                print(f"elif hit")
+                field_filler(driver,key,field_type)
+        except:
             failed_inputs += 1
-            print(f"Failed to fill {element_id}: {e}")
+            # print(key)
+            pass
 
-    items_filled = len(list_of_items) - failed_inputs
-    
-    # Scroll to a new element if necessary
-    scroll_to_location(driver, 'ID', 'policy_id')
-
-    return list_of_items, items_filled, False  # Assuming multiple_drivers is not altered within this function
+    items_filled = len(listofitems)- failed_inputs
+    # print(multiple_drivers)
+    newelement = 'policy_id'
+    scroll_to_location(driver,'ID',newelement)
+    return listofitems, items_filled ,multiple_drivers
 
 
 
