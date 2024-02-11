@@ -24,10 +24,6 @@ chrome_options = Options()
 chrome_options.add_experimental_option("detach", True)
 
 
-
-
-
-
 def login_to_socotra (driver):
     # Create a Chrome webdriver
 
@@ -100,7 +96,6 @@ def search_and_fill_all_inputs(driver,scroll_to_location,wait,key_policy_form,js
     # scroll_to_location('ID',newelement)
     return listofitems, items_filled ,multiple_drivers
 
-
 def search_and_fill_all_inputs_xpath(driver,scroll_to_location,wait,key_policy_form,json_data_1,dropdown_selection_json):
     create_menu_loading_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,key_policy_form)))
     inputlist = driver.find_elements(By.TAG_NAME, 'input')
@@ -144,7 +139,6 @@ def search_and_fill_all_inputs_xpath(driver,scroll_to_location,wait,key_policy_f
     # scroll_to_location('ID',newelement)
     return listofitems, items_filled ,multiple_drivers
 
-
 def dropdown_selector_json(driver,key,dropdown_selection_json):
     avoid_list =['react-select-4-input','mui-9','react-select-5-input']
     if key in avoid_list:
@@ -187,8 +181,7 @@ def dropdown_selector_json(driver,key,dropdown_selection_json):
                         print(f"Dropdown {key} selection failed")
             else:
              print(f"{key} dropdown selection data missing in json file")
-  
-   
+     
 def create_policyholder_button(driver):
     #print("Starting create_policyholder_button function...")
     try:
@@ -264,9 +257,6 @@ def find_element_by_regex_title(driver, title, pattern):
     finally:
         #print(f"Ending find_element_by_regex_title function for title: {title}...")
         pass
-
-
-
 
 def read_data_from_csv(file_path):
     #print("Starting read_data_from_csv function...")
@@ -351,10 +341,6 @@ def click_and_select_by_id_ending_with(driver, end_id, value_to_select):
         raise
     finally:
         print(f"Ending click_and_select_by_id_ending_with function for end_id: {end_id}...")
-
-
-
-
 
 def set_date_field(driver, title, pattern, date_value, date_format='%Y/%m/%d'):
     #print(f"Starting set_date_field for title: {title}...")
@@ -730,7 +716,6 @@ def fake_data_based_on_id(driver,key,json_data_1):
              print(f"{key} input data push failed:'fake_data_based_on_id'")
 
 
-
 def feild_filler(driver,key,field_type,json_data_1):
     # print(key)
     try:
@@ -777,7 +762,6 @@ def click_link_by_text(driver, link_text):
         pass
 
 
-
 def date_to_label_matcher(label):
     if label == 'calendar date entry':
         return datetime.today().date()
@@ -817,6 +801,88 @@ def button_finder(driver,key):
                 following_sibling.click()
             except:
                 pass
+
+#======================== peril related functions =========================================
+def peril_matcher(driver,peril_list_json):
+     Policy_details ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[1]'
+     exposure_link='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]'
+     vehicle_link ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]/ul'
+     peril_link ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]/ul/div/div/li/ul/div/div/li/div'
+     LINK_A ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]/ul/div/div/li/ul/div/div/li/div/div[2]/div/div/a'
+
+     vehicle_link_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,vehicle_link)))
+     driver.find_element(By.XPATH,vehicle_link).click()     
+     try:
+         time.sleep(1)
+         perils_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,peril_link)))
+         driver.find_element(By.XPATH,peril_link).click()
+         time.sleep(1)
+         tbody = driver.find_element(By.TAG_NAME, 'tbody')
+         perils = tbody.find_elements(By.XPATH, '//a[contains(@class, "MuiTableRow-root")]')
+        #  print(len(perils))                
+     except:
+         pass
+     
+     for peril in perils:
+        try:
+            #checking the first peril element in the table
+            perils_check = WebDriverWait(driver,10).until(EC.presence_of_all_elements_located((By.XPATH,'/html/body/div[1]/div[2]/main/div/div/div[2]/div/div[3]/div/div/table/tbody/a[1]')))
+            #peril row peril name extraction using innerHTML attribute
+            peril_name = peril.find_element(By.XPATH,'./*[1]').get_attribute("innerHTML")
+            for key, value in peril_list_json.items():
+                if peril_name in key and value== False:
+                    remove_container = peril.find_element(By.XPATH,'./*[3]')
+                    remove_container.find_element(By.TAG_NAME,'a').click()
+                    removebutton = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,f'//button[text()="Remove"]'))) 
+                    driver.find_element(By.XPATH,f'//button[text()="Remove"]').click()
+                    # time.sleep(2)
+                    WebDriverWait(driver,5).until(EC.presence_of_all_elements_located((By.XPATH,'/html/body/div[1]/div[2]/main/div/div/div[1]/span/svg'))) 
+                    WebDriverWait(driver,5).until(EC.invisibility_of_element_located((By.XPATH, '/html/body/div[1]/div[2]/main/div/div/div[1]/span/svg')))
+                    # time.sleep(2)
+                    WebDriverWait(driver,5).until(EC.presence_of_all_elements_located((By.XPATH,'/html/body/div[1]/div[1]/div/div/div[2]'))) 
+                    WebDriverWait(driver,5).until(EC.invisibility_of_element_located((By.XPATH, '/html/body/div[1]/div[1]/div/div/div[2]')))
+                    peril_matcher(driver,peril_list_json)                                        
+                    # /div/span/svg
+                    # /html/body/div[1]/div[1]/div/div/div[2]
+                    # /html/body/div[1]/div[1]/div/div/button
+        except:
+            print('element not matched')
+
+def peril_getter(driver):
+            # Policy_details ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[1]'
+            # exposure_link='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]'
+            vehicle_link ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]/ul'
+            peril_link ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]/ul/div/div/li/ul/div/div/li/div'
+            # LINK_A ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]/ul/div/div/li/ul/div/div/li/div/div[2]/div/div/a'
+
+            vehicle_link_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,vehicle_link)))
+            driver.find_element(By.XPATH,vehicle_link).click()     
+            try:
+                time.sleep(1)
+                perils_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,peril_link)))
+                driver.find_element(By.XPATH,peril_link).click()
+                time.sleep(1)
+                tbody = driver.find_element(By.TAG_NAME, 'tbody')
+                perils = tbody.find_elements(By.XPATH, '//a[contains(@class, "MuiTableRow-root")]')
+                return perils                
+            except:
+                print(f'peril getter failed')
+         
+def peril_deleter(driver,perils,peril_list_json):
+    for peril in reversed(perils):
+        pass
+# /html/body/div[1]/div[2]/main/div/div/div[1]/span/svg
+
+def peril_setter(driver,perils,peril_list_json):
+
+    for peril in reversed(perils):
+        pass
+
+         
+
+
+
+
 
 def accordian_filler():
     pass
