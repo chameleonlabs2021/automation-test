@@ -1,0 +1,30 @@
+
+login >> create new policy holder
+      >> create new application (only possible either a policy holder is active or new policy holder is created)
+======================================================================================================================
+login
+------
+one function to login and reach the dashboard\Home page
+================================================================
+Create new policy holder
+-------------------------
+click create button(button click function called) >> 
+dropdown appears >> 
+select New policyholder option >> 
+form appears (wait.until(is_page_loaded)) >> 
+search_and_fill_all_inputs(use this function to fill the form )>>
+click create button(button click function called)>>
+=================================================================
+create new application (only after new policy holder created or policy holder page active)
+------------------------------------------------------------------------------------------
+click create button(button click function called) >>
+dropdown appears >>
+select New policyholder option(can be standardized to generic function) >>  [ the first three steps can be a generic function]
+
+
+
+
+
+
+
+

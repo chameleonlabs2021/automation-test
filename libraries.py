@@ -23,9 +23,30 @@ fake = Faker()
 chrome_options = Options()
 chrome_options.add_experimental_option("detach", True)
 
+def json_loader(file_path):
+    with open(file_path, 'r') as file:
+        json_data = json.load(file)
+    return json_data
+
+def is_page_loaded(driver):
+    return driver.execute_script("return document.readyState === 'complete';")
+
+def is_scroll_complete(driver):
+    return driver.execute_script("return (window.innerHeight + window.scrollY) >= document.body.scrollHeight;")
+
+def scroll_to_location(driver,wait,type,element):
+    # print(element)    
+    # print(type)
+    if type == 'ID':
+      # print('testing')              
+      scroll_location = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, element)))
+    elif type =='XPATH':
+      scroll_location = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, element)))
+    driver.execute_script('arguments[0].scrollIntoView(true)',scroll_location)
+    wait.until(is_scroll_complete)
 
 def login_to_socotra (driver):
-    # Create a Chrome webdriver
+
 
     # Replace with the actual URL to login
     login_url = "https://sandbox.socotra.com/login"
@@ -46,6 +67,7 @@ def login_to_socotra (driver):
     #login page loaded check
     try:
         create_menu_loading_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.ID,'AppBar__Buttons--CreateDropdown')))
+        
     except:
         #print("login failed or page not loaded properly")
         pass
@@ -397,8 +419,6 @@ def is_scroll_complete(driver):
 #         #print("Ending scroll_to_location...")
 #         pass
 
-
-
 def dropdown_selector(driver,key):
     try:
         link1 = (f"//ul[contains(@id,'{key}-listbox')]")
@@ -415,7 +435,6 @@ def dropdown_selector(driver,key):
     except:
         #print(f"Dropdown {key} selection failed")
         pass
-
 
 # Define a dictionary mapping key substrings to faker functions
 key_to_faker = {
@@ -464,7 +483,6 @@ def field_filler(driver, key, field_type=None):
     except Exception as e:
         print(f"Field {key} filling failed: {e}")
 
-
 def search_and_fill_all_inputs_explosure(driver,scroll_to_location,wait,key):
     create_menu_loading_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,key)))
     inputlist = driver.find_elements(By.TAG_NAME, 'input')
@@ -504,8 +522,6 @@ def search_and_fill_all_inputs_explosure(driver,scroll_to_location,wait,key):
 
 
     return listofitems, items_filled, False  # Assuming multiple_drivers is not altered within this function
-
-
 
 def payment_Schedule_Selctor(driver,selection):
     try:
@@ -633,8 +649,6 @@ def datesetter_generic(driver, wait,key):
         except:
             print()
 
-
-
 def application_type_selector(driver,product = 1):   
     try:
       #to make sure the form is loaded by checking if first name feild is loaded 
@@ -678,7 +692,6 @@ def check_required_feilds(field_element):
 
 def input_feild_fill(field_element):
     check_required_feilds(field_element)
-
 
 def dropdown_selector(driver,key):
     try:
@@ -761,7 +774,6 @@ def click_link_by_text(driver, link_text):
         #print(f"Finished clicking on link with text '{link_text}'.")
         pass
 
-
 def date_to_label_matcher(label):
     if label == 'calendar date entry':
         return datetime.today().date()
@@ -776,7 +788,7 @@ def date_to_label_matcher(label):
     else:
         return fake.date_time_this_decade()
 
-        
+   
 def button_finder(driver,key):
     create_menu_loading_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,key)))
     section_elements = driver.find_elements(By.TAG_NAME, 'section')
@@ -802,7 +814,7 @@ def button_finder(driver,key):
             except:
                 pass
 
-#======================== peril related functions =========================================
+#======================== peril related functions ========================================
 def peril_matcher(driver,peril_list_json):
      Policy_details ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[1]'
      exposure_link='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]'

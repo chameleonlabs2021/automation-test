@@ -17,64 +17,27 @@ from libraries import *
 fake = Faker()
 chrome_options = Options()
 chrome_options.add_experimental_option("detach", True)
-
-
-
-
-with open('feild_values.json', 'r') as file:
-    json_data_1 = json.load(file)
-
-with open('dropdown_selection.json', 'r') as file:
-    dropdown_selection_json = json.load(file)
-
-
 # Create a Chrome webdriver
 driver = webdriver.Chrome(options = chrome_options)
 wait = WebDriverWait(driver, 10)
-# Replace with the actual URL to login
-login_url = "https://sandbox.socotra.com/login"
-driver.get(login_url)
-person1 = "7e22ad18-4382-4455-8022-2ea631872f8c"
-# 522855ef-1536-410b-b4a6-a425f7c03723
-policy_holder_url = f"https://sandbox.socotra.com/policyholder/{person1}"
 
-# https://sandbox.socotra.com/policyholder/7e22ad18-4382-4455-8022-2ea631872f8c/overview
-# Fill in the login details
-driver.find_element(By.ID,"LoginForm__UsernameField--Standard").send_keys("alice.lee") 
-driver.find_element(By.ID,"LoginForm__PasswordField--Standard").send_keys("socotra") 
-driver.find_element(By.ID,"LoginForm__HostnameField--Standard").send_keys("rpoolanchalil-synpulse-configeditor.co.sandbox.socotra.com") 
-driver.find_element(By.ID, "LoginForm__Button--StandardLogin").click()
-# time.sleep(2) 
-# time.sleep(15) 
 
-#login page loaded check
-try:
-   create_menu_loading_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.ID,'AppBar__Buttons--CreateDropdown')))
-except:
-    print("login failed or page not loaded properly")
 
-def is_page_loaded(driver):
-    return driver.execute_script("return document.readyState === 'complete';")
+# json loader called in to load json files
+json_data_1 = json_loader('feild_values.json')
+dropdown_selection_json = json_loader('dropdown_selection.json')
 
-def is_scroll_complete(driver):
-    return driver.execute_script("return (window.innerHeight + window.scrollY) >= document.body.scrollHeight;")
 
-def scroll_to_location(type,element):
-    # print(element)    
-    # print(type)
-    if type == 'ID':
-      # print('testing')              
-      scroll_location = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, element)))
-    elif type =='XPATH':
-      scroll_location = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, element)))
-    driver.execute_script('arguments[0].scrollIntoView(true)',scroll_location)
-    wait.until(is_scroll_complete)
+#login to socotra credintial hardcoded in the function/ credintial to be move to a ENV file
+login_to_socotra(driver)
+
 
 create_policyholder_button(driver)
 
 
 # Wait for the page to load
-time.sleep(2)
+wait.until(is_page_loaded)
+# time.sleep(2)
 
 # Select the "New Policyholder" option
 new_policyholder_dropdown(driver)
