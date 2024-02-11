@@ -9,58 +9,24 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 
 import time
+from datetime import datetime
 import random
 from faker import Faker
+from faker.providers import BaseProvider
 from libraries import *
 fake = Faker()
 chrome_options = Options()
 chrome_options.add_experimental_option("detach", True)
 
-# Replace with the actual JSON data
-json_data = '''{
-  "pages": [
-    {
-      "sections": [
-        {
-          "title": "Primary Policyholder",
-          "fields": [
-            {
-              "name": "first_name",
-              "prompt": "First Name",
-              "required": true,
-              "updateable": true,
-              "width": 4
-            },
-            {
-              "name": "last_name",
-              "prompt": "Last Name",
-              "required": true,
-              "updateable": true,
-              "width": 4
-            },
-            {
-              "name": "email",
-              "prompt": "Email",
-              "required": false,
-              "updateable": true,
-              "width": 4
-            },
-            {
-              "name": "phone_number",
-              "prompt": "Phone number",
-              "required": false,
-              "updateable": true,
-              "width": 4
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}'''
 
-# Parse the JSON data
-data = json.loads(json_data)
+
+
+with open('feild_values.json', 'r') as file:
+    json_data_1 = json.load(file)
+
+with open('dropdown_selection.json', 'r') as file:
+    dropdown_selection_json = json.load(file)
+
 
 # Create a Chrome webdriver
 driver = webdriver.Chrome(options = chrome_options)
@@ -94,16 +60,36 @@ def is_scroll_complete(driver):
     return driver.execute_script("return (window.innerHeight + window.scrollY) >= document.body.scrollHeight;")
 
 def scroll_to_location(type,element):
-    print(element)    
-    print(type)
+    # print(element)    
+    # print(type)
     if type == 'ID':
-      print('testing')              
+      # print('testing')              
       scroll_location = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, element)))
     elif type =='XPATH':
       scroll_location = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, element)))
     driver.execute_script('arguments[0].scrollIntoView(true)',scroll_location)
     wait.until(is_scroll_complete)
-    
+
+create_policyholder_button(driver)
+
+
+# Wait for the page to load
+time.sleep(2)
+
+# Select the "New Policyholder" option
+new_policyholder_dropdown(driver)
+
+# driver.get(policy_holder_url)
+
+# waiting for overview page to load
+wait.until(is_page_loaded)
+
+
+key_policyholder_form ='/html/body/div[1]/div[2]/div/form/div/div[3]/div/div/div/input'
+list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,scroll_to_location,wait,key_policyholder_form)
+
+policyholder_create_button(driver)
+
 
 driver.get(policy_holder_url)
 
@@ -111,16 +97,19 @@ driver.get(policy_holder_url)
 wait.until(is_page_loaded)
 
 #product selector
-application_type_selector(driver,6)
+application_type_selector(driver,1)
 
 
-key_policy_form ='/html/body/div[1]/div[2]/main/div/div/div[2]/div/div[2]/section/div/div[2]/div/div/div/div/div/div/input'
+key_policy_form ='/html/body/div[1]/div[2]/main/div/div/div[2]/div/div[2]/section/div/div[2]/div/div/div/div/div/div/input'                          
 key_exposure_form ='/html/body/div[1]/div[2]/main/div/div/div[2]/div/div[2]/div/button'
 
 # wait.until(is_page_loaded)
 
+#search for all button in the section and click to expand the accordion
+button_finder(driver,key_policy_form)
+
 #search all inputs and feild all dropdowns menus randomly
-list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,scroll_to_location,wait,key_policy_form)
+list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,scroll_to_location,wait,key_policy_form,json_data_1,dropdown_selection_json)
 
 #start and end date setter
 # datesetter(driver, wait)

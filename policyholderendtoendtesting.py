@@ -38,26 +38,34 @@ new_policyholder_dropdown(driver)
 wait.until(is_page_loaded)
 
 
+def scroll_to_location(type,element):
+    # print(element)    
+    # print(type)
+    if type == 'ID':
+      # print('testing')              
+      scroll_location = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, element)))
+    elif type =='XPATH':
+      scroll_location = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, element)))
+    driver.execute_script('arguments[0].scrollIntoView(true)',scroll_location)
+    wait.until(is_scroll_complete)
+
 key_policyholder_form ='/html/body/div[1]/div[2]/div/form/div/div[3]/div/div/div/input'
-list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,scroll_to_location,wait,key_policyholder_form)
+list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs_ph(driver,scroll_to_location,wait,key_policyholder_form)
 
 policyholder_create_button(driver)
 
 #Read data from csv and fill all fields
 # all_fields_successful=load_config( driver,'policyholder.csv',wait)
 
+with open('feild_values.json', 'r') as file:
+    json_data_1 = json.load(file)
+
+with open('dropdown_selection.json', 'r') as file:
+    dropdown_selection_json = json.load(file)
 
 
-def scroll_to_location(driver,type,element):
-    print(element)    
-    print(type)
-    if type == 'ID':
-      print('testing')              
-      scroll_location = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, element)))
-    elif type =='XPATH':
-      scroll_location = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, element)))
-    driver.execute_script('arguments[0].scrollIntoView(true)',scroll_location)
-    wait.until(is_scroll_complete)
+
+    
 
 # Click the "Create" button if all fields were successfully filled
 # if all_fields_successful:
@@ -78,7 +86,9 @@ key_policy_form ='/html/body/div[1]/div[2]/main/div/div/div[2]/div/div[2]/sectio
 key_exposure_form ='/html/body/div[1]/div[2]/main/div/div/div[2]/div/div[2]/div/button'
 #search all inputs and feild all dropdowns menus randomly
 # list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_dropdown_inputs(driver,scroll_to_location,wait,'//*[@id="policyStart"]')
-list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,scroll_to_location,wait,key_policy_form)#start and end date setter
+# list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,scroll_to_location,wait,key_policy_form)#start and end date setter
+list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,scroll_to_location,wait,key_policy_form,json_data_1,dropdown_selection_json)
+
 # datesetter(driver, wait)
 
 # payment schedule selector
@@ -99,7 +109,9 @@ click_button_by_text(driver, "Add Exposure", "MuiFab-root")
 wait.until(is_page_loaded)
 #search all inputs and feild all dropdowns menus randomly
 # list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_dropdown_inputs(driver,scroll_to_location,wait,'/html/body/div[1]/div[2]/main/div/div/div[2]/div/div[2]/div/button')
-list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,scroll_to_location,wait,key_exposure_form)
+list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs_ph(driver,scroll_to_location,wait,key_exposure_form)
+# list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,scroll_to_location,wait,key_policy_form,json_data_1,dropdown_selection_json)
+
 #-------- result printing -------------------------------
 print(f"total inputs found :{len(list_of_inputs)}")
 print(f"filled inputs:{failed_inputs}")
