@@ -265,151 +265,11 @@ def find_element_by_regex_title(driver, title, pattern):
         #print(f"Ending find_element_by_regex_title function for title: {title}...")
         pass
 
-
-
-
-def read_data_from_csv(file_path):
-    #print("Starting read_data_from_csv function...")
-    data_list = []
-    with open(file_path, newline='') as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            data_list.append({
-                'title': (row['title'] or '').strip(),
-                'data': (row['data'] or '').strip(),
-                'type': (row['type'] or '').strip(),
-                'switch': (row['switch'] or '').strip()
-            })
-    #print("Ending read_data_from_csv function...")
-    return data_list
-
-def handle_custom_dropdown(driver, title, dropdown_value, pattern):
-    #print(f"Starting handle_custom_dropdown function for title: {title}...")
-    #print(f"Handling custom dropdown: {title} with value: {dropdown_value}")
-    try:
-        input_id = find_element_by_regex_title(driver, title, pattern)
-        #print(f"Found element: {input_id}")
-        # Click the input element to open the dropdown
-        element = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.ID, input_id))
-        )
-        
-        # Click the element
-        element.click()
-        #print(f"Clicked element: {element}")
-        # Construct the XPath for the dropdown list
-        dropdown_list_xpath = f"//ul[contains(@id,'{input_id}-listbox')]"
-        ul_element = WebDriverWait(driver, 15).until(EC.visibility_of_element_located((By.XPATH, dropdown_list_xpath)))
-
-        # Find and click the correct list item
-        list_items = ul_element.find_elements(By.TAG_NAME, "li")
-        for item in list_items:
-            if item.text == dropdown_value:
-                item.click()
-                #print(f"Selected value: {dropdown_value}")
-                return True
-
-        raise Exception("Dropdown value not found")
-    except Exception as e:
-        #print(f"Failed to interact with dropdown: {e}")
-        return False
-    finally:
-        print(f"Ending handle_custom_dropdown function for title: {title}...")
-
-def click_and_select_by_id_ending_with(driver, end_id, value_to_select):
-    #print(f"Starting click_and_select_by_id_ending_with function for end_id: {end_id}...")
-    try:
-        # Construct an XPath that checks if the ID ends with end_id
-        element_xpath = f"//input[substring(@id, string-length(@id) - string-length('{end_id}') + 1) = '{end_id}']"
-        #print(f"Checking if element with XPath: {element_xpath} exists")
-        element = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, element_xpath))
-        )
-        
-        # Click the element to open the dropdown or activate the component
-        element.click()
-        #print(f"Clicked element: {element}")
-
-        # Assuming the value to select is visible and can be clicked
-        # Adjust the selector as needed for your specific case
-        # This is an example XPath and might need modification
-        value_xpath = f"//li[contains(text(), '{value_to_select}')]"  # Example for a custom dropdown
-        value_element = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, value_xpath))
-        )
-        value_element.click()
-        #print(f"Selected value: {value_to_select}")
-        return True
-    except NoSuchElementException:
-        #print(f"No element found with ID ending with: {end_id}")
-        raise
-    except TimeoutException:
-        #print(f"Timeout occurred while trying to select the value: {value_to_select}")
-        raise
-    except Exception as e:
-        #print(f"Error during click and select: {e}")
-        raise
-    finally:
-        print(f"Ending click_and_select_by_id_ending_with function for end_id: {end_id}...")
-
-
-
-
-
-def set_date_field(driver, title, pattern, date_value, date_format='%Y/%m/%d'):
-    #print(f"Starting set_date_field for title: {title}...")
-    #print(f"Setting date field {title} with value: {date_value} using pattern: {pattern}")
-    element_to_scroll_back = WebDriverWait(driver,10).until(EC.presence_of_all_elements_located(By.ID, title))
-    driver.execute_script("arguments[0].scrollIntoView();", element_to_scroll_back)
-
-    try:
-        # Locate the element using the provided regex pattern
-        date_field = find_element_by_regex_title(driver, title, pattern)
-        #print(f"Found element: {date_field}")
-
-        # Clear any existing value in the date field
-        driver.find_element(By.ID,title).click()
-        driver.find_element(By.ID,title).send_keys(Keys.CONTROL, 'a')
-        driver.find_element(By.ID,title).send_keys(Keys.DELETE)
-        driver.find_element(By.ID,title).send_keys(date_value.strftime('%Y/%m/%d'))
-        driver.find_element(By.ID,title).send_keys(Keys.RETURN)
-        # Format the date and set the new value
-
-    except NoSuchElementException as e:
-        #print(f"No such element: Could not locate element with title {title} using pattern {pattern}")
-        pass
-    except Exception as e:
-        pass
-        #print(f"Error during set_date_field for title {title}: {e}")
-    finally:
-        #print(f"Ending set_date_field for title: {title}...")
-        pass
-
 def is_scroll_complete(driver):
     #print("Starting is_scroll_complete...")
     result = driver.execute_script("return (window.innerHeight + window.scrollY) >= document.body.scrollHeight;")
     #print("Ending is_scroll_complete...")
     return result
-
-# def scroll_to_location(driver, type, element):
-#     #print("Starting scroll_to_location...")
-#     #print(element)
-#     #print(type)
-    
-#     try:
-#         if type == 'ID':
-#             #print('Testing ID')
-#             scroll_location = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, element)))
-#         elif type == 'XPATH':
-#             scroll_location = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, element)))
-#         driver.execute_script('arguments[0].scrollIntoView(true)', scroll_location)
-#         wait.until(is_scroll_complete)
-#     except Exception as e:
-#         #print(f"Error during scroll_to_location: {e}")
-#         pass
-#     finally:
-#         #print("Ending scroll_to_location...")
-#         pass
 
 
 
@@ -479,7 +339,7 @@ def field_filler(driver, key, field_type=None):
         print(f"Field {key} filling failed: {e}")
 
 
-def search_and_fill_all_inputs_explosure(driver,scroll_to_location,wait,key):
+def search_and_fill_all_inputs_explosure(driver,scroll_to_location,wait,key,dropdown_selection_json):
     create_menu_loading_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,key)))
     inputlist = driver.find_elements(By.TAG_NAME, 'input')
     listofitems = {}
@@ -496,15 +356,19 @@ def search_and_fill_all_inputs_explosure(driver,scroll_to_location,wait,key):
                 continue
             dummycheck = WebDriverWait(driver, 15).until(EC.presence_of_all_elements_located((By.ID,key)))
             driver.find_element(By.ID,key).click()
+            field_filler(driver,key,field_type)
+            wait.until(is_page_loaded)
+            # dropdown_selector_json(driver,key)
             if value == 'list':
-                dropdown_selector(driver,key)
-            elif field_type == 'tel':
-                print(f"key inside tel {key}",f"value {value}",f"field_type {field_type}")
-                datesetter_generic(driver,wait,key)
-            else:
-                print(f"elif hit")
-                print(f"key {key}",f"value {value}",f"field_type {field_type}")
-                field_filler(driver,key,field_type)
+                # dropdown_selector_json(driver,key)
+                dropdown_selector_json(driver,key,dropdown_selection_json)
+            # elif field_type == 'tel':
+            #     print(f"key inside tel {key}",f"value {value}",f"field_type {field_type}")
+            #     datesetter_generic(driver,wait,key)
+            # else:
+            #     print(f"elif hit")
+            #     print(f"key {key}",f"value {value}",f"field_type {field_type}")
+                # field_filler(driver,key,field_type)
         except:
             failed_inputs += 1
             # print(key)

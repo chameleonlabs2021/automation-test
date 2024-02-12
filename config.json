@@ -10,5 +10,5 @@
     "policyholder_form_json": "policyholder/policyholder.form.json",
     "policy_form_json":"policy/policy.json/policy.json",
     "csv_output_file": "test_results.csv",
-    "num_records": 1
+    "num_records": 
 }
