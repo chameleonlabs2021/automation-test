@@ -11,7 +11,7 @@ from faker import Faker
 
 import time
 import random
-from libraries import *
+from libraries_1 import *
 fake = Faker()
 chrome_options = Options()
 chrome_options.add_experimental_option("detach", True)

@@ -7,9 +7,7 @@
     "number_of_people_on_policy": "fake.random_int(min=2, max=10)",
     "previous_policy_start_date": "fake...",
     "credit_score": "fake.random_int(min=300, max=850)",
-    "first_name": "fake.name()",
-    "last_name": "fake.name()",
-    "custom_member_id": "fake.numerify(text='###-####')",
+    "name": "fake.name()",
     "age": "fake.random_int(min=18, max=99)",
     "email": "fake.email()",
     "date_of_birth": "fake.date_of_birth(minimum_age=18, maximum_age=60, end_datetime=datetime.now() - timedelta(days=365 * 60))",
@@ -25,6 +23,6 @@
     "county":"fake.county()",
     "iso_territory_code": "iso_territory_code()",
     "iso_protection_class":"iso_protection_class()",
-    "policyForm.group_example.0.group_string_example":"fake.word()"
+    "policyForm.group_example.0.group_string_example":"fake.word()",
+    "driver_license":"fake.random_int(min=111111111, max=999999999)"
         }
-
