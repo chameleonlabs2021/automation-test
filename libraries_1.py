@@ -8,6 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 import time
 from datetime import datetime, timedelta
 import random
@@ -485,26 +486,29 @@ def fake_data_based_on_id(driver,key,json_data_1):
              print(f"{key} input data push failed:'fake_data_based_on_id'")
 
 def peril_matcher(driver,peril_list_json):
-     Policy_details ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[1]'
-     exposure_link='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]'
-     vehicle_link ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]/ul'
-     peril_link ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]/ul/div/div/li/ul/div/div/li/div'
-     LINK_A ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]/ul/div/div/li/ul/div/div/li/div/div[2]/div/div/a'
-
+    #  Policy_details ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[1]'
+    #  exposure_link='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]'
+     vehicle_link ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]/ul/div/div/li'
+    #  peril_link ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]/ul/div/div/li/ul/div/div/li/div'
+    #  LINK_A ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]/ul/div/div/li/ul/div/div/li/div/div[2]/div/div/a'
+     perils = []
      vehicle_link_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,vehicle_link)))
-     driver.find_element(By.XPATH,vehicle_link).click()     
-     try:
-         time.sleep(1)
-         perils_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,peril_link)))
-         driver.find_element(By.XPATH,peril_link).click()
-         time.sleep(1)
-         tbody = driver.find_element(By.TAG_NAME, 'tbody')
-         perils = tbody.find_elements(By.XPATH, '//a[contains(@class, "MuiTableRow-root")]')
-        #  print(len(perils))                
-     except:
-         pass
+     expander_status = driver.find_element(By.XPATH,vehicle_link).get_attribute("aria-expanded")         
+     if expander_status == 'false':                            
+        try:
+            driver.find_element(By.XPATH,vehicle_link).click()
+            time.sleep(1)
+            click_link_by_text(driver,'Perils')
+            # perils_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,peril_link)))
+            # driver.find_element(By.XPATH,peril_link).click()
+            time.sleep(1)
+            tbody = driver.find_element(By.TAG_NAME, 'tbody')
+            perils = tbody.find_elements(By.XPATH, '//a[contains(@class, "MuiTableRow-root")]')
+            print(len(perils))                
+        except:
+            pass
      
-     for peril in perils:
+     for peril in reversed(perils):
         try:
             #checking the first peril element in the table
             perils_check = WebDriverWait(driver,10).until(EC.presence_of_all_elements_located((By.XPATH,'/html/body/div[1]/div[2]/main/div/div/div[2]/div/div[3]/div/div/table/tbody/a[1]')))
@@ -530,14 +534,16 @@ def peril_matcher(driver,peril_list_json):
             print('element not matched')
 
 def peril_getter(driver):
-            # Policy_details ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[1]'
-            # exposure_link='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]'
-            vehicle_link ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]/ul'
-            peril_link ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]/ul/div/div/li/ul/div/div/li/div'
-            # LINK_A ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]/ul/div/div/li/ul/div/div/li/div/div[2]/div/div/a'
+            # # Policy_details ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[1]'
+            # # exposure_link='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]'
+            vehicle_link ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]/ul/div/div/li'
+            # peril_link ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]/ul/div/div/li/ul/div/div/li/div'
+            # # LINK_A ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]/ul/div/div/li/ul/div/div/li/div/div[2]/div/div/a'
 
-            vehicle_link_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,vehicle_link)))
-            driver.find_element(By.XPATH,vehicle_link).click()     
+            # vehicle_link_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,vehicle_link)))
+            # driver.find_element(By.XPATH,vehicle_link).click()
+            # expander_status = driver.find_element(By.XPATH,vehicle_link).getr
+            # if     
             try:
                 time.sleep(1)
                 perils_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,peril_link)))
@@ -566,7 +572,15 @@ def click_link_by_text(driver, link_text):
         link = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.LINK_TEXT, link_text))
         )
+        link_element = driver.find_element(By.LINK_TEXT,link_text)
+        parent_li = link_element.find_element(By.XPATH, "./ancestor::li")
+        expander_status = parent_li.get_attribute("aria-expanded")
         link.click()
+        if expander_status == 'false':
+            link.click()
+            print('testing')
+        else:
+            print(f"{link_text} already expanded")
         #print(f"Clicked on link with text '{link_text}'.")
     except TimeoutException:
         print(f"Timeout: Link with text '{link_text}' not found or not clickable.")
