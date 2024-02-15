@@ -41,15 +41,12 @@ login_url = "https://sandbox.socotra.com/login"
 #================ test variable finish ======================================
 
 
-
 #login to socotra credintial hardcoded in the function/ credintial to be move to a ENV file
 login_to_socotra(driver,login_url)
 
 driver.get(policy_holder_url)
 
-
 # create_policyholder_button(driver)
-
 
 # Wait for the page to load
 # wait.until(is_page_loaded)
@@ -93,7 +90,7 @@ accordian_expanded(driver,expanded_list)
 
 list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,scroll_to_location,wait,key_policy_form,json_data_1,dropdown_selection_json,filled_inputs)
 #start and end date setter
-datesetter(driver, wait)
+# datesetter(driver, wait)
 
 
 # policyholder_create_button(driver)

@@ -56,7 +56,7 @@ def is_scroll_complete(driver):
     return driver.execute_script("return (window.innerHeight + window.scrollY) >= document.body.scrollHeight;")
 
 def scroll_to_location(driver,type,element,wait):
-    # print(element)    
+       # print(element)    
     # print(type)
     if type == 'ID':
       # print('testing')              
@@ -65,47 +65,6 @@ def scroll_to_location(driver,type,element,wait):
       scroll_location = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, element)))
     driver.execute_script('arguments[0].scrollIntoView(true)',scroll_location)
     wait.until(is_scroll_complete)
-    
-
-#obsolete function
-def _search_and_fill_all_dropdown_inputs(driver,scroll_to_location,wait,):
-    create_menu_loading_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.ID,'policyStart')))
-    inputlist = driver.find_elements(By.TAG_NAME, 'input')
-    listofitems = {}
-    failed_inputs = 0
-    multiple_drivers = False
-    for input_element in inputlist:
-        key = input_element.get_attribute("id")
-        value = input_element.get_attribute("aria-autocomplete")
-        field_type = input_element.get_attribute("type")
-        listofitems[key] = value
-        try:
-            dummycheck = WebDriverWait(driver, 15).until(EC.presence_of_all_elements_located((By.ID,key)))
-            driver.find_element(By.ID,key).click()
-            if value == 'list':
-                link1 = (f"//ul[contains(@id,'{key}-listbox')]")
-                ul_element = driver.find_element(By.XPATH,link1)
-                # dummycheck2 = WebDriverWait(driver, 15).until(EC.presence_of_all_elements_located((By.ID,ul_element )))
-                li_elements = ul_element.find_elements(By.TAG_NAME,"li")
-                selected_li = random.choice(li_elements)
-            else:
-                input_feild_fill(driver.find_element(By.ID, key))
-                # driver.find_element(By.ID, key).send_keys(fake)
-
-            if key == "policyForm.multiple_drivers" and int(selected_li.get_attribute("data-option-index"))== 1:
-                multiple_drivers = True
-                # print("multiple driver selected")
-            selected_li.click()
-        except:
-            failed_inputs += 1
-            # print(key)
-            pass
-    items_filled = len(listofitems)- failed_inputs
-    # print(multiple_drivers)
-    newelement = 'policy_id'
-    
-    scroll_to_location('ID',newelement)
-    return listofitems, items_filled ,multiple_drivers
 
 def search_and_fill_all_inputs(driver,scroll_to_location,wait,key_policy_form,json_data_1,dropdown_selection_json,filled_inputs):
     create_menu_loading_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,key_policy_form)))
@@ -229,7 +188,8 @@ def datesetter(driver, wait):
 def datesetter_generic(driver, wait,key,filled_inputs):
     # print("====>",key)
     if key == 'policyStart' or key== 'policyEnd':
-        startdate = fake.date_between(start_date='today', end_date='+3y')
+        # startdate = datetime.date.today()
+        startdate = fake.date_between(start_date='today', end_date='+3d')
         enddate = fake.date_between(start_date='+3y', end_date='+30y')
         try:
             dummycheck = WebDriverWait(driver, 15).until(EC.presence_of_all_elements_located((By.ID,"policyStart")))
@@ -311,23 +271,6 @@ def check_required_feilds(field_element):
 
 def input_feild_fill(field_element):
     check_required_feilds(field_element)
-
-#Obsolete function
-def _dropdown_selector(driver,key):
-    try:
-        link1 = (f"//ul[contains(@id,'{key}-listbox')]")
-        ul_element = driver.find_element(By.XPATH,link1)
-        # dummycheck2 = WebDriverWait(driver, 15).until(EC.presence_of_all_elements_located((By.ID,ul_element )))
-        li_elements = ul_element.find_elements(By.TAG_NAME,"li")
-        # print(li_elements)
-        selected_li = random.choice(li_elements)
-        # print(selected_li)
-        time.sleep(.25)
-        selected_li.click() 
-        time.sleep(.25)
-        # print(f"dropdown success {key} ")  
-    except:
-        print(f"Dropdown {key} selection failed")
 
 def dropdown_selector_random(driver,key):
     avoid_list =['react-select-4-input','mui-9','react-select-5-input']
@@ -609,12 +552,33 @@ def peril_getter(driver):
 def peril_deleter(driver,perils,peril_list_json):
     for peril in reversed(perils):
         pass
-# /html/body/div[1]/div[2]/main/div/div/div[1]/span/svg
 
 def peril_setter(driver,perils,peril_list_json):
 
     for peril in reversed(perils):
         pass
+#================================== Rahul's Code =======================================
+
+def click_link_by_text(driver, link_text):
+    #print(f"Clicking on link with text '{link_text}'...")
+    try:
+        # Locate the link by its text and click it
+        link = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.LINK_TEXT, link_text))
+        )
+        link.click()
+        #print(f"Clicked on link with text '{link_text}'.")
+    except TimeoutException:
+        print(f"Timeout: Link with text '{link_text}' not found or not clickable.")
+    except Exception as e:
+        #print(f"Error while trying to click the link: {e}")
+        pass
+    finally:
+        #print(f"Finished clicking on link with text '{link_text}'.")
+        pass   
+
+
+
 
          
          
