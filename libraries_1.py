@@ -65,7 +65,7 @@ def scroll_to_location(driver,type,element,wait):
     elif type =='XPATH':
       scroll_location = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, element)))
     driver.execute_script('arguments[0].scrollIntoView(true)',scroll_location)
-    wait.until(is_scroll_complete)
+    wait.until(is_scroll_complete(driver))
 
 def search_and_fill_all_inputs(driver,scroll_to_location,wait,key_policy_form,json_data_1,dropdown_selection_json,filled_inputs):
     create_menu_loading_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,key_policy_form)))
@@ -532,37 +532,136 @@ def peril_matcher(driver,peril_list_json):
                     # /html/body/div[1]/div[1]/div/div/button
         except:
             print('element not matched')
-
-def peril_getter(driver):
-            # # Policy_details ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[1]'
-            # # exposure_link='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]'
-            vehicle_link ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]/ul/div/div/li'
-            # peril_link ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]/ul/div/div/li/ul/div/div/li/div'
-            # # LINK_A ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]/ul/div/div/li/ul/div/div/li/div/div[2]/div/div/a'
-
-            # vehicle_link_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,vehicle_link)))
-            # driver.find_element(By.XPATH,vehicle_link).click()
-            # expander_status = driver.find_element(By.XPATH,vehicle_link).getr
-            # if     
+ 
+def add_peril_to_webpage(driver,peril_name,times):
+    try:
+        print(peril_name)
+        add_peril_button_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,'/html/body/div[1]/div[2]/main/div/div/div[2]/div/button')))
+        driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/main/div/div/div[2]/div/button').click()
+        
+        # click_link_by_text(driver, 'Add Peril')
+        Dialog_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,'/html/body/div[5]/div[3]/div')))
+        driver.find_element(By.ID, 'add-peril-selector').click()
+        option_dropdown_check= WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.ID,f'react-select-{times}-option-6')))
+        list_of_peril= {'Bodily Injury': 0,'Collision - Actual Cash Value':1,'Comprehensive - Actual Cash Value':2,'Road Side Service':3,'Third Party Liability':4,'Underinsured Motorist Insurance':5,'Uninsured Motorist Insurance':6}
+        # dropdown_peril = driver.find_element(By.ID, f'react-select-3-option-{value}').get_attribute("innerHTML")
+        # if peril_name == dropdown_peril:
+        print(list_of_peril[peril_name],'========>')
+        driver.find_element(By.ID, f'react-select-{times}-option-{list_of_peril[peril_name]}').click()
+        Add_button_check= WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,'/html/body/div[5]/div[3]/div/div[2]/button[1]')))
+        driver.find_element(By.XPATH, f'/html/body/div[5]/div[3]/div/div[2]/button[1]').click()               
+        WebDriverWait(driver,10).until(EC.presence_of_all_elements_located((By.CLASS_NAME,'Toastify__toast-body')))
+        WebDriverWait(driver,10).until(EC.invisibility_of_element_located((By.CLASS_NAME,'Toastify__toast-body')))
+        # time.sleep(10)
+        # else:
+        #     print(f'add Peril {peril_name} name dont match with dropdown option{i}')
+    except:
+        print('Peril adding failed')
+ 
+def peril_fetcher(driver):
+        vehicle_link ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]/ul/div/div/li'
+        # perils = []
+        vehicle_link_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,vehicle_link)))
+        expander_status = driver.find_element(By.XPATH,vehicle_link).get_attribute("aria-expanded")         
+        if expander_status == 'false':                            
             try:
+                driver.find_element(By.XPATH,vehicle_link).click()
                 time.sleep(1)
-                perils_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,peril_link)))
-                driver.find_element(By.XPATH,peril_link).click()
+                click_link_by_text(driver,'Perils')
+                # perils_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,peril_link)))
+                # driver.find_element(By.XPATH,peril_link).click()
                 time.sleep(1)
                 tbody = driver.find_element(By.TAG_NAME, 'tbody')
-                perils = tbody.find_elements(By.XPATH, '//a[contains(@class, "MuiTableRow-root")]')
-                return perils                
+                perils_fetched_from_webpage = tbody.find_elements(By.XPATH, '//a[contains(@class, "MuiTableRow-root")]')
+                return reversed(perils_fetched_from_webpage)              
             except:
-                print(f'peril getter failed')
-         
-def peril_deleter(driver,perils,peril_list_json):
-    for peril in reversed(perils):
-        pass
+                print('peril fetcher failed')
+                pass
+#============================ to be test code below=============================================
 
-def peril_setter(driver,perils,peril_list_json):
+def delete_peril_from_webpage(driver,peril):
+    remove_container = peril.find_element(By.XPATH,'./*[3]')
+    remove_container.find_element(By.TAG_NAME,'a').click()
+    removebutton = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,f'//button[text()="Remove"]'))) 
+    driver.find_element(By.XPATH,f'//button[text()="Remove"]').click()
+#     time.sleep(5)
+#     WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR, "MuiCircularProgress-svg")))
+#     WebDriverWait(driver, 10).until_not(EC.visibility_of_element_located((By.CSS_SELECTOR, "MuiCircularProgress-svg"))
+# )
+    
+    WebDriverWait(driver,5).until(EC.presence_of_all_elements_located((By.XPATH,'/html/body/div[1]/div[2]/main/div/div/div[1]/span'))) 
+    # /html/body/div[1]/div[2]/main/div/div/div[1]/span/svg
+    WebDriverWait(driver,5).until(EC.invisibility_of_element_located((By.XPATH, '/html/body/div[1]/div[2]/main/div/div/div[1]/span')))
+    # # time.sleep(2)
+    # WebDriverWait(driver,5).until(EC.presence_of_all_elements_located((By.XPATH,'/html/body/div[1]/div[1]/div/div/div[2]'))) 
+    # WebDriverWait(driver,5).until(EC.invisibility_of_element_located((By.XPATH, '/html/body/div[1]/div[1]/div/div/div[2]')))
+    time.sleep(3)
 
-    for peril in reversed(perils):
-        pass
+def missing_peril(driver,perils_fetched_from_webpage,peril_list_json):
+    webpage_peril_list = {}
+    for peril in perils_fetched_from_webpage:
+        peril_name = peril.find_element(By.XPATH,'./*[1]').get_attribute("innerHTML")
+        webpage_peril_list[peril_name] = peril
+    
+    json_keys_set = list(peril_list_json.keys())
+    webpage_peril_set = list(webpage_peril_list.keys())
+    missing_element = json_keys_set-webpage_peril_set
+    print(missing_element)
+    return missing_element
+
+def perils_matcher(driver,perils_fetched_from_webpage,peril_list_json):
+    webpage_peril_list = {}
+    for peril in perils_fetched_from_webpage:
+        peril_name = peril.find_element(By.XPATH,'./*[1]').get_attribute("innerHTML")
+        webpage_peril_list[peril_name] = peril
+
+    for json_perlin , value in peril_list_json.items():
+        if json_perlin in webpage_peril_list and value == True:
+            pass
+        elif json_perlin in webpage_peril_list and value == False:
+            delete_peril_from_webpage(driver,webpage_peril_list[json_perlin])
+        elif json_perlin not in webpage_peril_list and value== True:
+            add_peril_to_webpage(driver,webpage_peril_list[json_perlin],json_perlin)
+        else:
+            pass
+
+    
+
+
+
+    # for peril in perils_fetched_from_webpage:
+    #     #peril row peril name extraction using innerHTML attribute
+    #     peril_name = peril.find_element(By.XPATH,'./*[1]').get_attribute("innerHTML")
+    #     if peril_name in peril_list_json:
+    #         #Peril exists in JSON data
+    #         if peril_list_json[peril]:
+    #             #peril is true in JSON data, do nothing
+    #             pass
+    #         else:
+    #             #peril is false in JSON data, delete it from webpage
+    #             delete_peril_from_webpage(driver,peril)
+    #     else:
+    #         delete_peril_from_webpage(driver,peril)
+    #         # add_peril_to_webpage(driver,peril,peril_name)
+
+
+    # for json_peril_name, status in peril_list_json:
+    #     for webpage_peril in perils_fetched_from_webpage:
+    #         #peril row peril name extraction using innerHTML attribute
+    #         webpage_peril_name = webpage_peril.find_element(By.XPATH,'./*[1]').get_attribute("innerHTML")
+    #         if webpage_peril_name == json_peril_name:
+    #             #Peril exists in JSON data
+    #             if peril_list_json[webpage_peril_name]:
+    #                 #peril is true in JSON data, do nothing
+    #                 pass
+    #             else:
+    #                 #peril is false in JSON data, delete it from webpage
+    #                 delete_peril_from_webpage(driver,webpage_peril)
+    #         else:
+    #             pass
+
+    #             print('New peril on webpage not to be found in json')
+      
 #================================== Rahul's Code =======================================
 
 def click_link_by_text(driver, link_text):

@@ -125,6 +125,17 @@ login_to_socotra(driver,test_url)
 driver.get(test_url_peril2)
 
 # click_link_by_text(driver, 'Exposures')
+# peril_matcher(driver,peril_list_json)
 
-peril_matcher(driver,peril_list_json)
+perils_fetched_from_webpage = peril_fetcher(driver)
+print(perils_fetched_from_webpage)
 
+# add_list = missing_peril(driver,perils_fetched_from_webpage,peril_list_json)
+# # perils_matcher(driver,perils_fetched_from_webpage,peril_list_json) 
+
+add_list= ["Bodily Injury","Road Side Service","Comprehensive - Actual Cash Value"]
+
+times = 3
+for item in add_list:    
+    add_peril_to_webpage(driver,item,times)
+    times = times+1
