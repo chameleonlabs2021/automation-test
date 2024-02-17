@@ -45,49 +45,75 @@ login_url = "https://sandbox.socotra.com/login"
 
 #============================= login>>application select>> fill application=========================
 # #login to socotra credintial hardcoded in the function/ credintial to be move to a ENV file
-# login_to_socotra(driver,login_url)
+login_to_socotra(driver,login_url)
 
 # driver.get(policy_holder_url)
 
 # # create_policyholder_button(driver)
 
 # # Wait for the page to load
-# # wait.until(is_page_loaded)
+wait.until(is_page_loaded)
 # # time.sleep(2)
 
+create_new(driver, 2)
 # # Select the "New Policyholder" option
 # # new_policyholder_dropdown(driver)
 
-# # driver.get(policy_holder_url)
+# driver.get(policy_holder_url)
 
 # # waiting for overview page to load
 # wait.until(is_page_loaded)
 
 # #product selector
-# application_type_selector(driver,3)
+# application_type_selector(driver,2)
 
-# filled_inputs=set()
-# clicked_buttons=set()
-# expanded_list=set()
+filled_inputs=set()
+clicked_buttons=set()
+expanded_list=set()
 
-# key_policy_form ='/html/body/div[1]/div[2]/main/div/div/div[2]/div/div[2]/section/div/div[2]/div/div/div/div/div/div/input'                          
-# key_exposure_form ='/html/body/div[1]/div[2]/main/div/div/div[2]/div/div[2]/div/button'
+#===================================== form xpath address start ====================================================================
+
+key_policy_form ="//div[starts-with(@class,'BodyContainer')]"                         
+# # # key_exposure_form ='/html/body/div[1]/div[2]/main/div/div/div[2]/div/div[2]/div/button'
+key_create_policy_holder_form = "//form[contains(@class,'MuiBox-root css-0')]"
+
+#===================================== form xpath address ends =====================================================================
 
 # wait.until(is_page_loaded)
 
-# #search for all button in the section and click to expand the accordion
-# button_finder(driver,key_policy_form,clicked_buttons)
+
+# # # #search for all button in the section and click to expand the accordion
+# button_finder(driver,clicked_buttons)
 
 # accordian_expanded(driver,expanded_list)
 
-# #search all inputs and feild all dropdowns menus randomly
-# list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,scroll_to_location,wait,key_policy_form,json_data_1,dropdown_selection_json,filled_inputs)
+# # # #search all inputs and feild all dropdowns menus randomly
+list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,wait,key_create_policy_holder_form,json_data_1,dropdown_selection_json,filled_inputs)
 
-# button_finder(driver,key_policy_form,clicked_buttons)
 
-# accordian_expanded(driver,expanded_list)
+driver.find_element(By.XPATH,"//form[contains(@class,'MuiBox-root css-0')]/div/child::*[last()]/div/button[2]").click()
 
-# list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,scroll_to_location,wait,key_policy_form,json_data_1,dropdown_selection_json,filled_inputs)
+
+# #product selector
+application_type_selector(driver,1)
+
+wait.until(is_page_loaded)
+
+button_finder(driver,clicked_buttons)
+
+accordian_expanded(driver,expanded_list)
+
+list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,wait,key_policy_form,json_data_1,dropdown_selection_json,filled_inputs)
+
+button_finder(driver,clicked_buttons)
+
+accordian_expanded(driver,expanded_list)
+
+list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,wait,key_policy_form,json_data_1,dropdown_selection_json,filled_inputs)
+# # # payment schedule selector
+payment_Schedule_Selctor(driver,random.randint(1, 2))
+
+
 # #start and end date setter
 # # datesetter(driver, wait)
 
@@ -104,8 +130,7 @@ login_url = "https://sandbox.socotra.com/login"
 # # # Example usage
 # # click_button_by_text(driver, "Add Exposure", "MuiFab-root")
 
-# # payment schedule selector
-# # payment_Schedule_Selctor(driver,random.randint(1, 2))
+
 
 # # if multiple_drivers == True:
 # #    print("multiple_drivers is true")
@@ -119,23 +144,24 @@ login_url = "https://sandbox.socotra.com/login"
 #============================= login>>application select>> fill application=========================
 
 
-#============================ peril test =============================================
-login_to_socotra(driver,test_url)
+#============================ peril test start =============================================
+# login_to_socotra(driver,test_url)
 
-driver.get(test_url_peril2)
+# driver.get(test_url_peril2)
 
-# click_link_by_text(driver, 'Exposures')
+# # click_link_by_text(driver, 'Exposures')
 # peril_matcher(driver,peril_list_json)
 
-perils_fetched_from_webpage = peril_fetcher(driver)
-print(perils_fetched_from_webpage)
+# # perils_fetched_from_webpage = peril_fetcher(driver)
+# # print(perils_fetched_from_webpage)
 
-# add_list = missing_peril(driver,perils_fetched_from_webpage,peril_list_json)
-# # perils_matcher(driver,perils_fetched_from_webpage,peril_list_json) 
+# # # add_list = missing_peril(driver,perils_fetched_from_webpage,peril_list_json)
+# # # # perils_matcher(driver,perils_fetched_from_webpage,peril_list_json) 
 
-add_list= ["Bodily Injury","Road Side Service","Comprehensive - Actual Cash Value"]
+# add_list= ["Bodily Injury","Road Side Service","Comprehensive - Actual Cash Value"]
 
-times = 3
-for item in add_list:    
-    add_peril_to_webpage(driver,item,times)
-    times = times+1
+# times = 3
+# for item in add_list:    
+#     add_peril_to_webpage(driver,item,times)
+#     times = times+1
+#============================== peril test end =======================================================

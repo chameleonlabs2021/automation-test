@@ -24,5 +24,7 @@
   "policyForm.non_primary_policy_holders.0.non_primary_relationship":"spouse_named_insured",
   "policyForm.drivers.0.driver_license_state": "CO",
   "policyForm.drivers.0.driver_license":347651765,
-  "policyForm.drivers.0.driver_designation":"Primary"
+  "policyForm.drivers.0.driver_designation":"Primary",
+  "react-select-5-input":"Monthly",
+  "ofac_outcome":"approved"
 }

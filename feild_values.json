@@ -10,7 +10,7 @@
     "name": "fake.name()",
     "age": "fake.random_int(min=18, max=99)",
     "email": "fake.email()",
-    "date_of_birth": "fake.date_of_birth(minimum_age=18, maximum_age=60, end_datetime=datetime.now() - timedelta(days=365 * 60))",
+    "date_of_birth": "fake.date_of_birth(minimum_age=18, maximum_age=60, end_datetime=datetime.now() - timedelta(days=365 * 60))",  
     "phone": "fake.numerify(text='##########') " ,
     "relationship_to_client": "fake.random_element(elements=relationship_options)",
     "id": "fake.uuid4()",

@@ -16,13 +16,34 @@ from faker import Faker
 from faker.providers import BaseProvider
 fake = Faker()
 
-
+#========================== generic functions start ===============================================
 def json_loader(file_path):
     with open(file_path, 'r') as file:
         json_data = json.load(file)
     return json_data
 
+def is_page_loaded(driver):
+    return driver.execute_script("return document.readyState === 'complete';")
 
+def is_scroll_complete(driver):
+    return driver.execute_script("return (window.innerHeight + window.scrollY) >= document.body.scrollHeight;")
+
+def scroll_to_location(driver,type,element,wait):
+       # print(element)    
+    # print(type)
+    if type == 'ID':
+      # print('testing')              
+      scroll_location = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, element)))
+    elif type =='XPATH':
+      scroll_location = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, element)))
+    driver.execute_script('arguments[0].scrollIntoView(true)',scroll_location)
+    wait.until(is_scroll_complete(driver))
+
+
+#========================== generic functions end ===============================================
+    
+#========================== Custom function start ================================================
+#login function tested OK
 def login_to_socotra (driver,login_url):
     # Create a Chrome webdriver
 
@@ -50,24 +71,20 @@ def login_to_socotra (driver,login_url):
         pass
 
 
-def is_page_loaded(driver):
-    return driver.execute_script("return document.readyState === 'complete';")
+def create_new(driver,selection):
+    WebDriverWait(driver,15).until(EC.presence_of_element_located((By.ID,"AppBar__Buttons--CreateDropdown"))).click()
 
-def is_scroll_complete(driver):
-    return driver.execute_script("return (window.innerHeight + window.scrollY) >= document.body.scrollHeight;")
+    if selection == 1:
+        WebDriverWait(driver,15).until(EC.presence_of_element_located((By.ID,"CreateDropdown__ListItem--NewApplication"))).click()
+    else:
+        WebDriverWait(driver,15).until(EC.presence_of_element_located((By.ID,"CreateDropdown__ListItem--NewPolicyHolder"))).click()
+    
 
-def scroll_to_location(driver,type,element,wait):
-       # print(element)    
-    # print(type)
-    if type == 'ID':
-      # print('testing')              
-      scroll_location = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, element)))
-    elif type =='XPATH':
-      scroll_location = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, element)))
-    driver.execute_script('arguments[0].scrollIntoView(true)',scroll_location)
-    wait.until(is_scroll_complete(driver))
 
-def search_and_fill_all_inputs(driver,scroll_to_location,wait,key_policy_form,json_data_1,dropdown_selection_json,filled_inputs):
+
+#search and fill input : using tag name gets all the input feilds from thepage/ iterate this the input_list and checks if the inputs are dropdowns
+# date picker or normal text fields.based on type    
+def search_and_fill_all_inputs__(driver,wait,key_policy_form,json_data_1,dropdown_selection_json,filled_inputs):
     create_menu_loading_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,key_policy_form)))
     inputlist = driver.find_elements(By.TAG_NAME, 'input')
     listofitems = {}
@@ -86,13 +103,16 @@ def search_and_fill_all_inputs(driver,scroll_to_location,wait,key_policy_form,js
         else:            
             try:
                 dummycheck = WebDriverWait(driver, 15).until(EC.presence_of_all_elements_located((By.ID,key)))
+                #dropdowns have aria-autocomplete attribute value as list
                 if value == 'list':
                     print('==========>here<=========')
                     # dropdown_selector_random(driver,key)
                     dropdown_selector_json(driver,key,dropdown_selection_json,filled_inputs)
+                #datepicker have type attribute value as tel
                 elif field_type == 'tel':
                     driver.find_element(By.ID,key).click()
                     datesetter_generic(driver,wait,key,filled_inputs)
+                #all the remaining input lists are sent to field_filler function
                 else:
                     driver.find_element(By.ID,key).click()
                     feild_filler(driver,key,field_type,json_data_1,filled_inputs)
@@ -103,9 +123,56 @@ def search_and_fill_all_inputs(driver,scroll_to_location,wait,key_policy_form,js
 
     items_filled = len(listofitems)- failed_inputs
     # print(multiple_drivers)
-    newelement = 'policy_id'
-    scroll_to_location(driver,'ID',newelement,wait)
+    # newelement = 'policy_id'
+    # scroll_to_location(driver,'ID',newelement,wait)
     return listofitems, items_filled ,multiple_drivers
+
+
+def search_and_fill_all_inputs(driver,wait,form_xpath,json_data_1,dropdown_selection_json,filled_inputs):
+    form_locator = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,form_xpath)))
+    inputlist = driver.find_elements(By.TAG_NAME, 'input')
+    listofitems = {}
+    failed_inputs = 0
+    multiple_drivers = False
+    for input_element in inputlist:
+        key = input_element.get_attribute("id")
+        value = input_element.get_attribute("aria-autocomplete")
+        field_type = input_element.get_attribute("type")
+        selection = input_element.get_attribute("value")
+        listofitems[key] = value
+        print(f"{key} : {value}")
+        avoid_list =['react-select-4-input','mui-9','react-select-5-input']
+        if key in avoid_list or key in filled_inputs:
+            print(f"{key} input_felid found in ignorelist")
+        else:            
+            try:
+                dummycheck = WebDriverWait(driver, 15).until(EC.presence_of_all_elements_located((By.ID,key)))
+                #dropdowns have aria-autocomplete attribute value as list
+                if value == 'list':
+                    # print(f'==========>{key}<=========')
+                    # dropdown_selector_random(driver,key)
+                    dropdown_selector_json(driver,key,dropdown_selection_json,filled_inputs)
+                #datepicker have type attribute value as tel
+                elif field_type == 'tel':
+                    driver.find_element(By.ID,key).click()
+                    # print(f'==========>{key}<=========')
+                    datesetter_generic(driver,wait,key,filled_inputs)
+                #all the remaining input lists are sent to field_filler function
+                else:
+                    # print(f'==========>{key}<=========')
+                    driver.find_element(By.ID,key).click()
+                    feild_filler(driver,key,field_type,json_data_1,filled_inputs)
+            except:
+                failed_inputs += 1
+                # print(key)
+                pass
+
+    items_filled = len(listofitems)- failed_inputs
+    # print(multiple_drivers)
+    # newelement = 'policy_id'
+    # scroll_to_location(driver,'ID',newelement,wait)
+    return listofitems, items_filled ,multiple_drivers
+
 
 def payment_Schedule_Selctor(driver,selection):
     try:
@@ -237,7 +304,7 @@ def application_type_selector(driver,product = 1):
       startbutton.click()
     except:
       print("Url not loaded")
-      driver.quit() 
+    #   driver.quit() 
 
     try:
       #checking if  new application form is loaded
@@ -313,7 +380,7 @@ def dropdown_selector_json(driver,key,dropdown_selection_json, filled_inputs):
     else:
         for json_key, value in dropdown_selection_json.items():
             # json_key_new = json_key.lower()
-            # print(key,'<========>',json_key)
+            print(key,'<========>',json_key)
             if json_key  in key and key not in filled_inputs:            
                 selection = driver.find_element(By.ID,key).get_attribute("value")
                 # print(selection)
@@ -321,7 +388,7 @@ def dropdown_selector_json(driver,key,dropdown_selection_json, filled_inputs):
                 dropdown_element.find_element(By.XPATH, "following-sibling::*").click()
                 count = 0
                 
-                while not selection:
+                while not selection or selection == 'Annually':
                     if count > 10:
                         break          
                     try:
@@ -383,50 +450,44 @@ def feild_filler(driver,key,field_type,json_data_1,filled_inputs):
     
 def date_to_label_matcher(label):
     if label == 'calendar date entry':
-        return datetime.today().date()
-    
+        return datetime.today().date()    
     if label == 'Year of Make *':
         date_new= fake.date_between(start_date='today', end_date='-10y')
         return date_new
+    if label=='Date of Birth':
+        return fake.date_time_between(start_date='-100y', end_date='-19y')
     else:
         return fake.date_time_this_decade()
         
-def button_finder(driver,key,clicked_buttons):
+def button_finder(driver,clicked_buttons):
     try:
-        create_menu_loading_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,key)))
-        section_elements = driver.find_elements(By.TAG_NAME, 'section')        
-        for section in section_elements:
-            buttonlist = section.find_elements(By.TAG_NAME, 'button')
-            # listofitems = {}
-            # failed_inputs = 0
-            # multiple_drivers = False
-            for button in buttonlist: 
-                # key = button.get_attribute("id")
-                text = button.get_attribute("innerHTML")
-                field_type = button.get_attribute("type")
-                #checking if button is a dropdown arrowicon
-                button_aria_label = button.get_attribute("aria-label")
-                # print(text,'===', field_type)
-                
-                try:
-                    label = button.find_element(By.XPATH, "preceding-sibling::label")
-                    # print(label.text)
-                    parent_element = label.find_element(By.XPATH, "..")
-                    following_sibling = parent_element.find_element(By.XPATH, "following-sibling::*")
-                    if label not in clicked_buttons:
-                        button.click()
-                        clicked_buttons.add(label)
-                        time.sleep(.3)               
-                        # following_sibling = parent_element.find_element(By.XPATH, "following-sibling::*")
-                        # print('testing')
-                    else:
-                        print('Error: The button was ignored due to a previous click action.')
+        BodyContainer = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,"//div[starts-with(@class,'BodyContainer')]")))
+        # bc = driver.find_elements(By.XPATH,"//div[starts-with(@class,'BodyContainer')]")
+        buttonlist = driver.find_elements(By.TAG_NAME, 'button')        
+        for button in buttonlist:
+            # key = button.get_attribute("id")
+            text = button.get_attribute("innerHTML")
+            field_type = button.get_attribute("type")
+            #checking if button is a dropdown arrowicon
+            button_aria_label = button.get_attribute("aria-label")
+            # print(text,'===', field_type)
+            
+            try:
+                label = button.find_element(By.XPATH, "preceding-sibling::label")
+                # print(label.text)
+                if label not in clicked_buttons:
+                    button.click()
+                    clicked_buttons.add(label)
+                    time.sleep(.3)               
 
-                except:
-                    if button_aria_label == 'Close' or button_aria_label  == 'Open':
-                        print("Dropdown arrow icon Button ignorned")
-                    else:
-                        print(f"button selection and accordin click failed")
+                else:
+                    print('Error: The button was ignored due to a previous click action.')
+
+            except:
+                if button_aria_label == 'Close' or button_aria_label  == 'Open':
+                    print("Dropdown arrow icon Button ignorned")
+                else:
+                    print(f"button selection and click failed")
     except:
         print('No buttons found')
         pass
@@ -484,7 +545,7 @@ def fake_data_based_on_id(driver,key,json_data_1):
         #     print("test passed")
         else:
              print(f"{key} input data push failed:'fake_data_based_on_id'")
-
+#========= peril functions =================================================================
 def peril_matcher(driver,peril_list_json):
     #  Policy_details ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[1]'
     #  exposure_link='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]'
@@ -532,26 +593,28 @@ def peril_matcher(driver,peril_list_json):
                     # /html/body/div[1]/div[1]/div/div/button
         except:
             print('element not matched')
- 
-def add_peril_to_webpage(driver,peril_name,times):
+
+#this function used continously should pass in times from a counter beacuse id of peril dropdown increments everytime
+def add_peril_to_webpage(driver,peril_name,times=3):
     try:
         print(peril_name)
-        add_peril_button_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,'/html/body/div[1]/div[2]/main/div/div/div[2]/div/button')))
-        driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/main/div/div/div[2]/div/button').click()
-        
+        add_peril_button_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,"//div[starts-with(@class,'LayoutContainer')]/div/button")))
+        driver.find_element(By.XPATH, "//div[starts-with(@class,'LayoutContainer')]/div/button").click()     
         # click_link_by_text(driver, 'Add Peril')
-        Dialog_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,'/html/body/div[5]/div[3]/div')))
+        Dialog_check = WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,"//div[@data-testid='sentinelStart']/following-sibling::div/div")))
         driver.find_element(By.ID, 'add-peril-selector').click()
         option_dropdown_check= WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.ID,f'react-select-{times}-option-6')))
         list_of_peril= {'Bodily Injury': 0,'Collision - Actual Cash Value':1,'Comprehensive - Actual Cash Value':2,'Road Side Service':3,'Third Party Liability':4,'Underinsured Motorist Insurance':5,'Uninsured Motorist Insurance':6}
         # dropdown_peril = driver.find_element(By.ID, f'react-select-3-option-{value}').get_attribute("innerHTML")
         # if peril_name == dropdown_peril:
-        print(list_of_peril[peril_name],'========>')
         driver.find_element(By.ID, f'react-select-{times}-option-{list_of_peril[peril_name]}').click()
-        Add_button_check= WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,'/html/body/div[5]/div[3]/div/div[2]/button[1]')))
-        driver.find_element(By.XPATH, f'/html/body/div[5]/div[3]/div/div[2]/button[1]').click()               
-        WebDriverWait(driver,10).until(EC.presence_of_all_elements_located((By.CLASS_NAME,'Toastify__toast-body')))
-        WebDriverWait(driver,10).until(EC.invisibility_of_element_located((By.CLASS_NAME,'Toastify__toast-body')))
+        Add_button_check= WebDriverWait(driver,15).until(EC.presence_of_all_elements_located((By.XPATH,"//div[@data-testid='sentinelStart']/following-sibling::div/div/div[2]/button")))
+        driver.find_element(By.XPATH, f"//div[@data-testid='sentinelStart']/following-sibling::div/div/div[2]/button").click()  
+        WebDriverWait(driver,10).until(EC.presence_of_all_elements_located((By.XPATH,"//div[starts-with(@class,'MainContainer')]/div/div/span")))
+        WebDriverWait(driver,10).until(EC.invisibility_of_element_located((By.XPATH,"//div[starts-with(@class,'MainContainer')]/div/div/span")))
+        WebDriverWait(driver,10).until(EC.presence_of_all_elements_located((By.XPATH,"//div[starts-with(@class,'Toastify')]/div/div/div")))
+        WebDriverWait(driver,10).until(EC.invisibility_of_element_located((By.XPATH,"//div[starts-with(@class,'Toastify')]/div/div/div")))
+        # click_link_by_text(driver,'Perils')
         # time.sleep(10)
         # else:
         #     print(f'add Peril {peril_name} name dont match with dropdown option{i}')
@@ -577,7 +640,6 @@ def peril_fetcher(driver):
             except:
                 print('peril fetcher failed')
                 pass
-#============================ to be test code below=============================================
 
 def delete_peril_from_webpage(driver,peril):
     remove_container = peril.find_element(By.XPATH,'./*[3]')
@@ -609,6 +671,10 @@ def missing_peril(driver,perils_fetched_from_webpage,peril_list_json):
     print(missing_element)
     return missing_element
 
+#============================ to be test code below=============================================
+
+
+#not working error to be debugged
 def perils_matcher(driver,perils_fetched_from_webpage,peril_list_json):
     webpage_peril_list = {}
     for peril in perils_fetched_from_webpage:
