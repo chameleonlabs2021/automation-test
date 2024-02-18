@@ -1,0 +1,27 @@
+{
+"AutoInsurance":{
+    "dropdown": false,
+    "option": null
+},
+"Jewel-protect":{
+    "dropdown": true,
+    "option": ["Default add on coverages","Liability","Optional property coverages","Personal Floater Endorsement","Property"]
+},
+"Protect":{
+    "dropdown": true,
+    "option": ["Default add on coverages","Liability","Optional property coverages","Personal Floater Endorsement","Property"]
+},
+"Deposit-Dynamic":{
+    "dropdown": false,
+    "option": null
+},
+"Deposit-Fixed":{
+    "dropdown": false,
+    "option": null
+},
+"vehicle":{
+    "dropdown": false,
+    "option": null
+}
+
+}

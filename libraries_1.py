@@ -15,6 +15,7 @@ import random
 from faker import Faker
 from faker.providers import BaseProvider
 fake = Faker()
+import logging
 
 #========================== generic functions start ===============================================
 def json_loader(file_path):
@@ -39,6 +40,8 @@ def scroll_to_location(driver,type,element,wait):
     driver.execute_script('arguments[0].scrollIntoView(true)',scroll_location)
     wait.until(is_scroll_complete(driver))
 
+def generic_dropdown_selector():
+    pass
 
 #========================== generic functions end ===============================================
     
@@ -70,7 +73,7 @@ def login_to_socotra (driver,login_url):
         #print("login failed or page not loaded properly")
         pass
 
-
+#function to create a policy holder or policy
 def create_new(driver,selection):
     WebDriverWait(driver,15).until(EC.presence_of_element_located((By.ID,"AppBar__Buttons--CreateDropdown"))).click()
 
@@ -79,7 +82,75 @@ def create_new(driver,selection):
     else:
         WebDriverWait(driver,15).until(EC.presence_of_element_located((By.ID,"CreateDropdown__ListItem--NewPolicyHolder"))).click()
     
+def sidebar_selector(driver,selection):
+  # 0 forpolicy details, 1 for exposure, 2 price breakdown
+  sidebar_list = ['Policy Details','Exposures','Price Breakdown']
+  try:
+      WebDriverWait(driver,15).until(EC.presence_of_element_located((By.XPATH,"//div[starts-with(@class,'LeftSidebarContainer')]")))  
+  except IndexError:
+      print(f'sidebar not located')
+      pass
+  except Exception as e:
+      print("An error occurred 93:", e)
+  if selection:
+    try:
+        WebDriverWait(driver,15).until(EC.presence_of_element_located((By.XPATH,f"//li[contains(@id, '{sidebar_list[0]}')]"))).click()
+        WebDriverWait(driver,15).until(EC.presence_of_element_located((By.XPATH,f"//li[contains(@id, '{sidebar_list[selection]}')]")))
+        driver.find_element(By.XPATH,f"//li[contains(@id, '{sidebar_list[selection]}')]/div").click()  
+    except IndexError:
+           print(f'sidebar {sidebar_list[selection]} link not located')
+           pass
+    except Exception as e:
+      print("An error occurred 103:", e)
+      
+def Add_exposure(driver,application_type,sidebar_link_selection=1,exposure_selection=1):
 
+    if application_type in[1,4,5,6] :#if application is auto insurance just click add exposure
+        sidebar_selector(driver,sidebar_link_selection)
+        try:
+            WebDriverWait(driver,15).until(EC.presence_of_element_located((By.XPATH,"//div[starts-with(@class,'BodyContainer')]/div[2]/button"))).click()
+        except IndexError:
+            print('BodyContainer not to be found')
+        except Exception as e:
+            print("An error occurred 114:", e)
+    elif application_type in[2,3]:#if application is anything other than auto insurance just click add exposure and select from the list
+        sidebar_selector(driver,sidebar_link_selection)        
+        try:
+            #checking for Add exposure button
+            WebDriverWait(driver,15).until(EC.presence_of_element_located((By.XPATH,"//button[normalize-space(.)='Add Exposure']"))).click()
+            #checking if  new menu dilog is loaded                                
+            WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH,"//div[starts-with(@class,'MuiDialog-container')]/div")))
+            #dropdown menu element selection and click
+            driver.find_element(By.ID,"add-exposure-selector").click()
+
+            #checking if the dropdown is activated by checking 5th element of the dropdown
+            dropdown_check = WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH,"//div[starts-with(@class,'react-select__menu-list')]/div[5]")))
+            # selection of the exposure based on exposure_selection parameter
+            exposure_name =driver.find_element(By.XPATH,f"//div[starts-with(@class,'react-select__menu-list')]/div[{exposure_selection}]").get_attribute('innerHTML')
+            link = (f"//div[starts-with(@class,'react-select__menu-list')]/div[{exposure_selection}]")
+            driver.find_element(By.XPATH, link).click()
+            print(f'{exposure_name}- exposure')
+            #select and click the Add button
+            # print("before add button clicking")
+            WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH,"//div[starts-with(@class,'MuiDialog-container')]/div/div[2]/button"))).click()
+            # print("before add progress visible")
+            WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH,"//span[starts-with(@class,'MuiCircularProgress')]")))
+            # print("before add progress invisible")
+            WebDriverWait(driver,10).until(EC.invisibility_of_element_located((By.XPATH,"//span[starts-with(@class,'MuiCircularProgress')]")))
+            # print("before add tostify visible")
+            WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH,"//div[starts-with(@class,'Toastify')]/div/div/button")))
+            # print("after add tostify visible")
+            # WebDriverWait(driver,10).until(EC.invisibility_of_element_located((By.XPATH,"//div[starts-with(@class,'Toastify')]/div/div/button")))              
+        except IndexError:
+            print("application dropdown selection and submission failed")
+            driver.quit() 
+        except Exception as e:
+            print("An error occurred 142:", e)
+            print("An error occurred:", e)
+            print("Exception type:", type(e))
+            print("Exception args:", e.args)
+    else:
+        print('wrong or nonlisted exposure selection')
 
 
 #search and fill input : using tag name gets all the input feilds from thepage/ iterate this the input_list and checks if the inputs are dropdowns
@@ -296,29 +367,27 @@ def datesetter_generic(driver, wait,key,filled_inputs):
         except:
             print()
 
+#tested with relative xpath OK
 def application_type_selector(driver,product = 1):   
     try:
-      #to make sure the form is loaded by checking if first name feild is loaded 
-      dummycheck = WebDriverWait(driver, 15).until(EC.presence_of_all_elements_located((By.XPATH,"/html/body/div[1]/div[2]/main/div/div[1]/div/a")))
-      startbutton = driver.find_element(By.XPATH, "/html/body/div[1]/div[2]/main/div/div[1]/div/a")
-      startbutton.click()
+      #to make sure the application selection button is loaded
+      button_check = WebDriverWait(driver, 15).until(EC.presence_of_all_elements_located((By.XPATH,"//div[starts-with(@class,'TopContainer')]/div/a")))
+      driver.find_element(By.XPATH, "//div[starts-with(@class,'TopContainer')]/div/a").click()
     except:
       print("Url not loaded")
-    #   driver.quit() 
-
     try:
       #checking if  new application form is loaded
-      startApplication_check = WebDriverWait(driver, 15).until(EC.presence_of_all_elements_located((By.XPATH,"/html/body/div[1]/div[2]/div/div/div[1]/div/div")))
+      startApplication_check = WebDriverWait(driver, 15).until(EC.presence_of_all_elements_located((By.ID,"product-select")))
       #dropdown menu element selection and click
-      dropdown1 = driver.find_element(By.XPATH, "/html/body/div[1]/div[2]/div/div/div[1]/div/div")
-      dropdown1.click()
+      driver.find_element(By.ID,"product-select").click()
+      
       #checking if the dropdown is activated
-      dummycheck = WebDriverWait(driver, 15).until(EC.presence_of_all_elements_located((By.XPATH,"/html/body/div[4]/div[3]/ul/li[1]")))
+      dropdown_check = WebDriverWait(driver, 15).until(EC.presence_of_all_elements_located((By.XPATH,"//div[@id='menu-']/div[3]/ul/li[6]")))
       # product Auto Insurance selected
-      link = (f'/html/body/div[4]/div[3]/ul/li[{product}]')
+      link = (f"//div[@id='menu-']/div[3]/ul/li[{product}]")
       driver.find_element(By.XPATH, link).click()
       #select and click the create button
-      driver.find_element(By.XPATH, "/html/body/div[1]/div[2]/div/div/div[3]/button[2]").click()
+      driver.find_element(By.XPATH, "//div[starts-with(@class,'MuiContainer')]/div/div/div[3]/button[2]").click()
     except:
       print("application dropdown selection and submission failed")
       driver.quit() 
