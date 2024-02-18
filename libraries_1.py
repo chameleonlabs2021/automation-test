@@ -38,7 +38,7 @@ def scroll_to_location(driver,type,element,wait):
     elif type =='XPATH':
       scroll_location = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, element)))
     driver.execute_script('arguments[0].scrollIntoView(true)',scroll_location)
-    wait.until(is_scroll_complete(driver))
+    wait.until(is_scroll_complete)
 
 def generic_dropdown_selector():
     pass

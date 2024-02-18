@@ -109,6 +109,9 @@ button_finder(driver,clicked_buttons)
 accordian_expanded(driver,expanded_list)
 
 list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,wait,key_policy_form,json_data_1,dropdown_selection_json,filled_inputs)
+
+scroll_back_to = "//div[starts-with(@class,'BodyContainer')]/div"
+scroll_to_location(driver,'XPATH',scroll_back_to,wait )
 # # # payment schedule selector
 payment_Schedule_Selctor(driver,random.randint(1, 2))
 
