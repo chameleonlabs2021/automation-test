@@ -26,5 +26,15 @@
   "policyForm.drivers.0.driver_license":347651765,
   "policyForm.drivers.0.driver_designation":"Primary",
   "react-select-5-input":"Monthly",
-  "ofac_outcome":"approved"
+  "ofac_outcome":"approved",
+  "unrepaired_damage":"No - Existing Damage",
+  "vehicle_type":"Car",
+  "ownership_indicator":"Owned - Financed",
+  "vehicle_plated_state":"KS",
+  "primary_vehicle_use":"Drive to Work / School",
+  "body_style":"2 door",
+  "travel_radius":"Between 11 to 20 Miles",
+  "distance_to_work_school":"Between 11 to 20 Miles",
+  "travel_radius_farm":"Within 150 miles of Farm"
+
 }

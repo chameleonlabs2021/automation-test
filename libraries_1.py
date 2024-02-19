@@ -152,7 +152,6 @@ def Add_exposure(driver,application_type,sidebar_link_selection=1,exposure_selec
     else:
         print('wrong or nonlisted exposure selection')
 
-
 #search and fill input : using tag name gets all the input feilds from thepage/ iterate this the input_list and checks if the inputs are dropdowns
 # date picker or normal text fields.based on type    
 def search_and_fill_all_inputs__(driver,wait,key_policy_form,json_data_1,dropdown_selection_json,filled_inputs):
@@ -205,6 +204,7 @@ def search_and_fill_all_inputs(driver,wait,form_xpath,json_data_1,dropdown_selec
     listofitems = {}
     failed_inputs = 0
     multiple_drivers = False
+    avoid_list =['react-select-4-input','mui-9','react-select-5-input']
     for input_element in inputlist:
         key = input_element.get_attribute("id")
         value = input_element.get_attribute("aria-autocomplete")
@@ -212,7 +212,19 @@ def search_and_fill_all_inputs(driver,wait,form_xpath,json_data_1,dropdown_selec
         selection = input_element.get_attribute("value")
         listofitems[key] = value
         print(f"{key} : {value}")
-        avoid_list =['react-select-4-input','mui-9','react-select-5-input']
+        try:
+            WebDriverWait(driver,15).until(EC.presence_of_element_located(By.XPATH,"//input[contains(@id,'year')]"))
+            vehile_year_id = driver.find_element(By.XPATH,"//input[contains(@id,'year')]").get_attribute("id")
+            avoid_list.append(vehile_year_id)
+            WebDriverWait(driver,15).until(EC.presence_of_element_located(By.XPATH,"//input[contains(@id,'make')]"))
+            vehile_make_id = driver.find_element(By.XPATH,"//input[contains(@id,'year')]").get_attribute("id")
+            avoid_list.append(vehile_make_id)
+            WebDriverWait(driver,15).until(EC.presence_of_element_located(By.XPATH,"//input[contains(@id,'model')]"))
+            vehile_model_id = driver.find_element(By.XPATH,"//input[contains(@id,'year')]").get_attribute("id")
+            avoid_list.append(vehile_model_id)
+        except:
+            print("Vehicle form not loaded")                                         
+
         if key in avoid_list or key in filled_inputs:
             print(f"{key} input_felid found in ignorelist")
         else:            
@@ -242,6 +254,10 @@ def search_and_fill_all_inputs(driver,wait,form_xpath,json_data_1,dropdown_selec
     # print(multiple_drivers)
     # newelement = 'policy_id'
     # scroll_to_location(driver,'ID',newelement,wait)
+    
+    # to keep track of all the policy holder and apolicy created the number is pushed into log file==============
+    # id_push_to_set = driver.find_element(By.ID,"policy_id")
+
     return listofitems, items_filled ,multiple_drivers
 
 
@@ -497,8 +513,9 @@ def feild_filler(driver,key,field_type,json_data_1,filled_inputs):
             fake_data_based_on_id(driver,key,json_data_1)
             filled_inputs.add(key)  
         elif field_type == "number":
-            input_field = driver.find_element(By.ID,key)
-            input_field.send_keys(fake.random_int(min=1, max=100))
+            # input_field = driver.find_element(By.ID,key)
+            # input_field.send_keys(fake.random_int(min=1, max=100))
+            fake_data_based_on_id(driver,key,json_data_1)
             # print(f"number field success {key} ")
             filled_inputs.add(key)  
         elif field_type == "email":
@@ -847,8 +864,10 @@ def rater_ID():
     choice = random.choice(list_rater_ID)
     return choice
 
-
-
+def vin():
+    vin_no = ['JH4DB1641NS802336','JH4KA2640HC004148','ZARBB32N2P7576659','ZARBB42N1M6006871','WBAUL73519VE86441','2B3AA4CT6AH296431','1C4GT64L3VB385580','ZFFEW59A190165924','ZFFXA19A2J0076514','1HD1GGL32WY313221','SALFA2BE2BH225819','1HG3G5655YA032538','WVWAK93C86E065022','5YJSA1H21EFP65731','SCAZS02D1MCX35275','WDBWK73FX6F102942','SAJEA51C12WC35097','SAJDA15B32M233205','ZHWGU12TX8LA05825','JKASV6B126B505368' ]
+    choice = random.choice(vin_no)
+    return choice
 
 
 

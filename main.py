@@ -39,6 +39,8 @@ key_policy_form ="//div[starts-with(@class,'BodyContainer')]"
 # # # key_exposure_form ='/html/body/div[1]/div[2]/main/div/div/div[2]/div/div[2]/div/button'
 key_create_policy_holder_form = "//form[contains(@class,'MuiBox-root css-0')]"
 
+
+
 #===================================== form xpath address ends =====================================================================
 
 
@@ -93,7 +95,7 @@ WebDriverWait(driver,10).until(EC.presence_of_all_elements_located((By.XPATH,"//
 
 wait.until(is_page_loaded)
 # #product selector
-application_type_selector(driver,2)
+application_type_selector(driver,application_type)
 
 
 wait.until(is_page_loaded)
@@ -116,10 +118,21 @@ scroll_to_location(driver,'XPATH',scroll_back_to,wait )
 payment_Schedule_Selctor(driver,random.randint(1, 2))
 
 
+Add_exposure(driver,application_type)
 
+wait.until(is_page_loaded)
+
+vehicle_check_xpath ="//p[text()='Vehicle']"
+# WebDriverWait(driver,10).until(EC.presence_of_all_elements_located((By.XPATH,"////p[text()='Vehicle']')]")))
+
+list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,wait,vehicle_check_xpath,json_data_1,dropdown_selection_json,filled_inputs)
+
+wait.until(is_page_loaded)
+
+list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,wait,vehicle_check_xpath,json_data_1,dropdown_selection_json,filled_inputs)
 #parameters for Add exposure: driver,application_type,sidebar_link_selection,exposure_dropdown_selection
-for i in range(5):
-    Add_exposure(driver,2,1,i+1)
+# for i in range(5):
+#     Add_exposure(driver,2,1,i+1)
 
 
 # # waiting for overview page to load

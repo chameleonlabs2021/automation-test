@@ -27,5 +27,13 @@
     "iso_territory_code": "iso_territory_code()",
     "iso_protection_class":"iso_protection_class()",
     "policyForm.group_example.0.group_string_example":"fake.word()",
-    "driver_license":"fake.random_int(min=111111111, max=999999999)"
+    "driver_license":"fake.random_int(min=111111111, max=999999999)",
+    "vin":"vin()",
+    "vehicle_value": "fake.random_int(min=5000, max=35000)",
+    "license_plate":"fake.license_plate()",
+    "annual_miles": "fake.random_int(min=150000, max=150000)",
+    "motorcycle_cc":"fake.random_int(min=500, max=2000)",
+    "policyForm.drivers.0.driver_firstname": "fake.first_name()",
+    "policyForm.drivers.0.driver_lastname" : "fake.last_name()"
+
         }
