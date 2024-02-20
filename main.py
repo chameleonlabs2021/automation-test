@@ -21,17 +21,24 @@ chrome_options.add_experimental_option("detach", True)
 driver = webdriver.Chrome(options = chrome_options)
 wait = WebDriverWait(driver, 10)
 
+#=======================================================================
 
+input_file = 'master_json_file.json'
+output_file = 'dropdown_selection.json'
+application_type = 1
+filled_inputs=set()
+clicked_buttons=set()
+expanded_list=set()
+
+
+
+json_generator(input_file,output_file)
 
 # json loader called in to load json files
 json_data_1 = json_loader('feild_values.json')
 dropdown_selection_json = json_loader('dropdown_selection.json')
 peril_list_json = json_loader('peril_list.json')
 #== application type: Auto Insurance:1 ,Jewel protect:2, protect:3, Deposit Dynamic :4,Depost fixed :5, Vehicle:6 =======
-application_type = 1
-filled_inputs=set()
-clicked_buttons=set()
-expanded_list=set()
 
 #===================================== form xpath address start ====================================================================
 

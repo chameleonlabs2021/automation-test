@@ -43,6 +43,30 @@ def scroll_to_location(driver,type,element,wait):
 def generic_dropdown_selector():
     pass
 
+
+def json_generator(input_file, output_file):
+       state_code_random_choice =""
+       with open(input_file, 'r') as f:
+        data = json.load(f)
+        random_data = {}
+        for key, value in data.items():
+            if isinstance(value, list) and value:
+                choice = random.choice(value)
+                # random_data[key] = choice
+                if "state" in key and not state_code_random_choice:
+                    state_code_random_choice = choice
+                    random_data[key] = state_code_random_choice
+                elif "state" in key and state_code_random_choice:
+                    random_data[key] = state_code_random_choice
+                else:
+                    random_data[key] = choice
+                    pass
+            else:
+                random_data[key] = value
+        
+        with open(output_file, 'w') as f:
+            json.dump(random_data, f, indent=4)
+
 #========================== generic functions end ===============================================
     
 #========================== Custom function start ================================================
@@ -759,7 +783,6 @@ def missing_peril(driver,perils_fetched_from_webpage,peril_list_json):
 
 #============================ to be test code below=============================================
 
-
 #not working error to be debugged
 def perils_matcher(driver,perils_fetched_from_webpage,peril_list_json):
     webpage_peril_list = {}
@@ -779,42 +802,6 @@ def perils_matcher(driver,perils_fetched_from_webpage,peril_list_json):
 
     
 
-
-
-    # for peril in perils_fetched_from_webpage:
-    #     #peril row peril name extraction using innerHTML attribute
-    #     peril_name = peril.find_element(By.XPATH,'./*[1]').get_attribute("innerHTML")
-    #     if peril_name in peril_list_json:
-    #         #Peril exists in JSON data
-    #         if peril_list_json[peril]:
-    #             #peril is true in JSON data, do nothing
-    #             pass
-    #         else:
-    #             #peril is false in JSON data, delete it from webpage
-    #             delete_peril_from_webpage(driver,peril)
-    #     else:
-    #         delete_peril_from_webpage(driver,peril)
-    #         # add_peril_to_webpage(driver,peril,peril_name)
-
-
-    # for json_peril_name, status in peril_list_json:
-    #     for webpage_peril in perils_fetched_from_webpage:
-    #         #peril row peril name extraction using innerHTML attribute
-    #         webpage_peril_name = webpage_peril.find_element(By.XPATH,'./*[1]').get_attribute("innerHTML")
-    #         if webpage_peril_name == json_peril_name:
-    #             #Peril exists in JSON data
-    #             if peril_list_json[webpage_peril_name]:
-    #                 #peril is true in JSON data, do nothing
-    #                 pass
-    #             else:
-    #                 #peril is false in JSON data, delete it from webpage
-    #                 delete_peril_from_webpage(driver,webpage_peril)
-    #         else:
-    #             pass
-
-    #             print('New peril on webpage not to be found in json')
-      
-#================================== Rahul's Code =======================================
 
 def click_link_by_text(driver, link_text):
     #print(f"Clicking on link with text '{link_text}'...")

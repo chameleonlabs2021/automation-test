@@ -1,9 +1,41 @@
 from faker import Faker
-
+import json
+import random
 # Create an instance of the Faker class
 fake = Faker()
 
 
-vin_no = ['JH4DB1641NS802336','JH4KA2640HC004148','ZARBB32N2P7576659','ZARBB42N1M6006871','WBAUL73519VE86441','2B3AA4CT6AH296431','1C4GT64L3VB385580','ZFFEW59A190165924','ZFFXA19A2J0076514','1HD1GGL32WY313221','SALFA2BE2BH225819','1HG3G5655YA032538','WVWAK93C86E065022','5YJSA1H21EFP65731','SCAZS02D1MCX35275','WDBWK73FX6F102942','SAJEA51C12WC35097','SAJDA15B32M233205','ZHWGU12TX8LA05825','JKASV6B126B505368' ]
+def json_generator(input_file, output_file):
+       state_code_random_choice =""
+       with open(input_file, 'r') as f:
+        data = json.load(f)
+        random_data = {}
+        for key, value in data.items():
+            if isinstance(value, list) and value:
+                choice = random.choice(value)
+                # random_data[key] = choice
+                if "state" in key and not state_code_random_choice:
+                    state_code_random_choice = choice
+                    random_data[key] = state_code_random_choice
+                elif "state" in key and state_code_random_choice:
+                    random_data[key] = state_code_random_choice
+                else:
+                    random_data[key] = choice
+                    pass
+            else:
+                random_data[key] = value
+        
+        with open(output_file, 'w') as f:
+            json.dump(random_data, f, indent=4)
 
-print(fake.random_int(min=5000, max=35000))
+
+input_file = 'master_json_file.json'
+output_file = 'Random_data.json'
+
+json_generator(input_file,output_file)
+
+# states = [ "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS",
+#         "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY",
+#         "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"
+#     ]
+# print(len(states))
