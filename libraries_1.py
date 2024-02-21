@@ -43,13 +43,16 @@ def scroll_to_location(driver,type,element,wait):
 def generic_dropdown_selector():
     pass
 
+##button click to lock and price or save or to select other options
 def top_container_button_options(driver,button):
     WebDriverWait(driver, 15).until(EC.element_to_be_clickable((By.XPATH,f"//div[starts-with(@class,'Top')]/div/button[{button}]"))).click()
 
+#circular loader waiting function
 def circular_loader_wait(driver):
     WebDriverWait(driver,10).until(EC.presence_of_all_elements_located((By.XPATH,"//span[starts-with(@class,'MuiCircularProgress')]")))  
     WebDriverWait(driver,10).until(EC.invisibility_of_element_located((By.XPATH,"//span[starts-with(@class,'MuiCircularProgress')]")))
 
+#toastify message waiting function
 def toastify_message_wait(driver):
     WebDriverWait(driver,10).until(EC.presence_of_all_elements_located((By.XPATH,"//div[starts-with(@class,'Toastify__toast-container')]/div")))  
     WebDriverWait(driver,10).until(EC.invisibility_of_element_located((By.XPATH,"//div[starts-with(@class,'Toastify__toast-container')]/div")))
@@ -111,14 +114,25 @@ def login_to_socotra (driver,login_url):
         pass
 
 #function to create a policy holder or policy
-def create_new(driver,selection):
-    WebDriverWait(driver,15).until(EC.presence_of_element_located((By.ID,"AppBar__Buttons--CreateDropdown"))).click()
+def create_new(driver,wait,selection, form_locator,feild_value_json,dropdown_selection_json,filled_inputs):
 
-    if selection == 1:
-        WebDriverWait(driver,15).until(EC.presence_of_element_located((By.ID,"CreateDropdown__ListItem--NewApplication"))).click()
-    else:
-        WebDriverWait(driver,15).until(EC.presence_of_element_located((By.ID,"CreateDropdown__ListItem--NewPolicyHolder"))).click()
+    try:
+        WebDriverWait(driver,15).until(EC.presence_of_element_located((By.ID,"AppBar__Buttons--CreateDropdown"))).click()
+        if selection == 1:
+            WebDriverWait(driver,15).until(EC.presence_of_element_located((By.ID,"CreateDropdown__ListItem--NewApplication"))).click()
+        else:
+            WebDriverWait(driver,15).until(EC.presence_of_element_located((By.ID,"CreateDropdown__ListItem--NewPolicyHolder"))).click()
+
+        #search all input feilds fill them based on the json file
+        list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,wait,form_locator,feild_value_json,dropdown_selection_json,filled_inputs)
+        WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH,"//form/div/div[20]/div/button[2]"))).click()
+        
+    except:
+        print("Policyholder creation failed")
     
+def create_policy_holder(driver):
+    WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH,"//form/div/div[20]/div/button[2]"))).click()
+
 def sidebar_selector(driver,selection):
   # 0 forpolicy details, 1 for exposure, 2 price breakdown
   sidebar_list = ['Policy Details','Exposures','Price Breakdown']
@@ -670,7 +684,10 @@ def fake_data_based_on_id(driver,key,json_data_1):
             break
         else:
              print(f"{key} input data push failed:'fake_data_based_on_id'")
-#========= peril functions =================================================================
+#========================== Custom function end ================================================
+
+
+#================================= peril functions start========================================
 def peril_matcher(driver,peril_list_json):
     #  Policy_details ='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[1]'
     #  exposure_link='/html/body/div[1]/div[2]/div/div/div[2]/ul/li[2]'
@@ -796,7 +813,7 @@ def missing_peril(driver,perils_fetched_from_webpage,peril_list_json):
     print(missing_element)
     return missing_element
 
-#============================ to be test code below=============================================
+#============================ to be tested: code below=============================================
 
 #not working error to be debugged
 def perils_matcher(driver,perils_fetched_from_webpage,peril_list_json):
@@ -815,7 +832,9 @@ def perils_matcher(driver,perils_fetched_from_webpage,peril_list_json):
         else:
             pass
 
-    
+#============================ peril functions end ==============================================
+
+
 
 
 def click_link_by_text(driver, link_text):
@@ -851,7 +870,7 @@ def click_link_by_text(driver, link_text):
          
 
 
-#===================== field data filling functions below ======================#
+#===================== data creator functions to fill field data start ======================#
 
 def iso_territory_code():
     return 'US'
@@ -897,7 +916,6 @@ def Customer_id_generator():
     except Exception as e:
         print("An error occurred:", e)
 
-
 def policy_logger(driver):
     try:
         policy_id_element = WebDriverWait(driver, 15).until(EC.visibility_of_element_located((By.ID,"policy_id")))
@@ -909,6 +927,10 @@ def policy_logger(driver):
     except:
         print("Policy Id not logged")
         pass
+#======================data creator functions to fill field data end =========================#
+    
+
+
 
 if __name__ =="__main__":
     print("Library file cant be run individually")
