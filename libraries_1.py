@@ -43,7 +43,20 @@ def scroll_to_location(driver,type,element,wait):
 def generic_dropdown_selector():
     pass
 
+def top_container_button_options(driver,button):
+    WebDriverWait(driver, 15).until(EC.element_to_be_clickable((By.XPATH,f"//div[starts-with(@class,'Top')]/div/button[{button}]"))).click()
 
+def circular_loader_wait(driver):
+    WebDriverWait(driver,10).until(EC.presence_of_all_elements_located((By.XPATH,"//span[starts-with(@class,'MuiCircularProgress')]")))  
+    WebDriverWait(driver,10).until(EC.invisibility_of_element_located((By.XPATH,"//span[starts-with(@class,'MuiCircularProgress')]")))
+
+def toastify_message_wait(driver):
+    WebDriverWait(driver,10).until(EC.presence_of_all_elements_located((By.XPATH,"//div[starts-with(@class,'Toastify__toast-container')]/div")))  
+    WebDriverWait(driver,10).until(EC.invisibility_of_element_located((By.XPATH,"//div[starts-with(@class,'Toastify__toast-container')]/div")))
+
+
+# json generator radomize the dropdown_selection data by creating a temporary json at start of the program.
+# this helps to set all the state selection equal.
 def json_generator(input_file, output_file):
        state_code_random_choice =""
        with open(input_file, 'r') as f:
@@ -162,7 +175,7 @@ def Add_exposure(driver,application_type,sidebar_link_selection=1,exposure_selec
             # print("before add progress invisible")
             WebDriverWait(driver,10).until(EC.invisibility_of_element_located((By.XPATH,"//span[starts-with(@class,'MuiCircularProgress')]")))
             # print("before add tostify visible")
-            WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH,"//div[starts-with(@class,'Toastify')]/div/div/button")))
+            WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH,"//div[starts-with(@class,'Toastify__toast-container')]/div")))
             # print("after add tostify visible")
             # WebDriverWait(driver,10).until(EC.invisibility_of_element_located((By.XPATH,"//div[starts-with(@class,'Toastify')]/div/div/button")))              
         except IndexError:
@@ -507,6 +520,7 @@ def dropdown_selector_json(driver,key,dropdown_selection_json, filled_inputs):
                         # dummycheck2 = WebDriverWait(driver, 15).until(EC.presence_of_all_elements_located((By.ID,ul_element )))
                         li_elements = ul_element.find_elements(By.TAG_NAME,"li")
                         # print(type(li_elements))
+                        selected_li = None
                         for item in li_elements:
                             content = item.get_attribute("innerText")
                             # print(content)
@@ -653,6 +667,7 @@ def fake_data_based_on_id(driver,key,json_data_1):
             # print(value)
         # if json_key_new.find(key) != -1:
         #     print("test passed")
+            break
         else:
              print(f"{key} input data push failed:'fake_data_based_on_id'")
 #========= peril functions =================================================================
@@ -856,7 +871,44 @@ def vin():
     choice = random.choice(vin_no)
     return choice
 
+def Customer_id_generator():
+    try:
+        # Read the last line of the text file
+        with open('policy_holder_details.txt', 'r') as file:
+            lines = file.readlines()
+            last_line = lines[-1].strip()  # Remove any leading/trailing whitespace
+            
+            # Extract the policy number and the non-numeric part from the last line
+            non_numeric_part = ''.join(filter(str.isalpha, last_line))  # Extract non-numeric characters
+            policy_number = ''.join(filter(str.isdigit, last_line))  # Extract only digits
+            
+            # Convert policy number to integer and increment it
+            policy_number = int(policy_number)
+            new_policy_number = policy_number + 1
+            
+            new_customer_id = non_numeric_part + str(new_policy_number)
+            # Append the new policy number to the file
+            with open('policy_holder_details.txt', 'a') as file:
+                file.write(f'\n{new_customer_id}')
+            
+            return new_customer_id
+    except FileNotFoundError:
+        print("File not found.")
+    except Exception as e:
+        print("An error occurred:", e)
 
+
+def policy_logger(driver):
+    try:
+        policy_id_element = WebDriverWait(driver, 15).until(EC.visibility_of_element_located((By.ID,"policy_id")))
+        policy_id_inner_html= policy_id_element.get_attribute("innerHTML")
+       
+        with open("policy_details.txt", "a") as f:
+            f.write(policy_id_inner_html + "\n")
+            print("Policy number logged successfully:", policy_id_inner_html)
+    except:
+        print("Policy Id not logged")
+        pass
 
 if __name__ =="__main__":
     print("Library file cant be run individually")

@@ -16,6 +16,7 @@
     "date_of_birth": "fake.date_of_birth(minimum_age=18, maximum_age=60, end_datetime=datetime.now() - timedelta(days=365 * 60))",  
     "phone": "fake.numerify(text='##########') " ,
     "relationship_to_client": "fake.random_element(elements=relationship_options)",
+    "custom_member_id":"Customer_id_generator()",
     "id": "fake.uuid4()",
     "building_id": "fake.numerify(text='###-####')",
     "sfdc_property_id_at_purchase": "fake.numerify(text='###-####')",

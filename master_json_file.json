@@ -32,7 +32,6 @@
     "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY",
     "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"
 ],
-    "policyForm.drivers.0.driver_license":347651765,
     "policyForm.drivers.0.driver_designation":["Primary","Secondary","Occasional","Student away from home over 50 miles","Excluded - Driver"],
     "react-select-5-input":"Monthly",
     "ofac_outcome":"approved",
@@ -43,10 +42,10 @@
         "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY",
         "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"
     ],
-    "primary_vehicle_use":["Drive to Work / School","Pleasure Only","Business - Sales - Artisan","Farm"],
+    "primary_vehicle_use":["Drive to Work / School","Pleasure Only","Business - Sales - Artisan"],
     "body_style":["2 door","4 door"],
     "travel_radius":["Between 11 to 20 Miles","Less than 10 Miles","Over 20 Miles"],
     "distance_to_work_school":["Between 11 to 20 Miles","Less than 10 Miles","Over 20 Miles"],
     "travel_radius_farm":["Within 150 miles of Farm","Intra State","Multiple States"]
-  
+
   }

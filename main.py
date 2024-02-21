@@ -46,10 +46,7 @@ key_policy_form ="//div[starts-with(@class,'BodyContainer')]"
 # # # key_exposure_form ='/html/body/div[1]/div[2]/main/div/div/div[2]/div/div[2]/div/button'
 key_create_policy_holder_form = "//form[contains(@class,'MuiBox-root css-0')]"
 
-
-
 #===================================== form xpath address ends =====================================================================
-
 
 
 #================ test variable start ======================================
@@ -93,8 +90,9 @@ WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH,"//form/
 
 # driver.get(policy_holder_url)
 # driver.get("https://sandbox.socotra.com/policy/100017896/quotes/100017902/details")
+circular_loader_wait(driver)
 
-WebDriverWait(driver,10).until(EC.presence_of_all_elements_located((By.XPATH,"//span[starts-with(@class,'MuiCircularProgress')]")))
+# WebDriverWait(driver,10).until(EC.presence_of_all_elements_located((By.XPATH,"//span[starts-with(@class,'MuiCircularProgress')]")))
 # print('test1')
 # WebDriverWait(driver,10).until(EC.invisibility_of_element_located((By.XPATH,"//span[starts-with(@class,'MuiCircularProgress')]")))
 # print('test2')
@@ -140,6 +138,11 @@ list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(dri
 #parameters for Add exposure: driver,application_type,sidebar_link_selection,exposure_dropdown_selection
 # for i in range(5):
 #     Add_exposure(driver,2,1,i+1)
+
+policy_logger(driver)
+
+#button click to lock and price or save or to select other options
+top_container_button_options(driver,2)
 
 
 # # waiting for overview page to load
