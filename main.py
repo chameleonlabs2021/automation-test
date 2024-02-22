@@ -25,8 +25,12 @@ wait = WebDriverWait(driver, 10)
 
 input_file = 'master_json_file.json'
 output_file = 'dropdown_selection.json'
+
 #== application type: Auto Insurance:1 ,Jewel protect:2, protect:3, Deposit Dynamic :4,Depost fixed :5, Vehicle:6 =======
-application_type = 1
+# options 1,2,3,4,5,6 Application type selection
+application_type = 2
+# min [1] max [1,2,3,4,5] covers all five exposures
+exposure_selection =[1,2,3]
 
 #variables to track all ready filled in fields
 filled_inputs=set()
@@ -34,14 +38,16 @@ clicked_buttons=set()
 expanded_list=set()
 
 
+#========================= json related files start==========================================
+
 #this function creates a dropdown_selection_json on the fly using the master_json_file
 json_generator(input_file,output_file)
-
 # json loader called in to load json files
-json_data_1 = json_loader('feild_values.json')
+field_value_json = json_loader('field_values.json')
 dropdown_selection_json = json_loader('dropdown_selection.json')
 peril_list_json = json_loader('peril_list.json')
 
+#========================= json related files end=============================================
 
 #===================================== form xpath address start ====================================================================
 
@@ -65,90 +71,36 @@ policy_holder_url = f"https://sandbox.socotra.com/policyholder/{person1}"
 login_url = "https://sandbox.socotra.com/login"
 
 #================ test variable end ======================================
+#====================params ==============================================
+
+params = {"driver": driver,"wait": wait, "login_url":login_url,"key_policy_form" :key_policy_form,"policy_holder_form_locator": policy_holder_form_locator,
+          "field_value_json":field_value_json,"dropdown_selection_json": dropdown_selection_json, "peril_list_json": peril_list_json, "filled_inputs":filled_inputs,
+            "clicked_buttons":clicked_buttons,"expanded_list":expanded_list,"application_type":application_type,"exposure_selection":exposure_selection}
 
 
 #============================= login>>application select>> fill application=========================
-# #login to socotra credintial hardcoded in the function/ credintial to be move to a ENV file
-login_to_socotra(driver,login_url)
+# # #login to socotra credintial hardcoded in the function/ credintial to be move to a ENV file
+# login_to_socotra(driver,login_url)
 
+# # # Wait for the page to load
+# wait.until(is_page_loaded)
+# # # time.sleep(2)
 
+# # Create a new policy holder. 
+# create_new(driver,wait, 2,policy_holder_form_locator,field_value_json,dropdown_selection_json,filled_inputs)
+# # # Select the "New Policyholder" option
+# # # new_policyholder_dropdown(driver)
 
-# # Wait for the page to load
-wait.until(is_page_loaded)
-# # time.sleep(2)
+# #circular loader waiting function
+# circular_loader_wait(driver)
 
-# Create a new policy holder. 
-create_new(driver,wait, 2,policy_holder_form_locator,json_data_1,dropdown_selection_json,filled_inputs)
-# # Select the "New Policyholder" option
-# # new_policyholder_dropdown(driver)
+# wait.until(is_page_loaded)
 
+# # #product selector application type can be defined in the start of this page.
+# application_type_selector(driver,application_type)
 
-#circular loader waiting function
-circular_loader_wait(driver)
-
-
-wait.until(is_page_loaded)
-
-
-# #product selector
-application_type_selector(driver,application_type)
-
-
-wait.until(is_page_loaded)
-
-button_finder(driver,clicked_buttons)
-
-accordian_expanded(driver,expanded_list)
-
-list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,wait,key_policy_form,json_data_1,dropdown_selection_json,filled_inputs)
-
-button_finder(driver,clicked_buttons)
-
-accordian_expanded(driver,expanded_list)
-
-list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,wait,key_policy_form,json_data_1,dropdown_selection_json,filled_inputs)
-
-scroll_back_to = "//div[starts-with(@class,'BodyContainer')]/div"
-scroll_to_location(driver,'XPATH',scroll_back_to,wait )
-# # # payment schedule selector
-payment_Schedule_Selctor(driver,random.randint(1, 2))
-
-
-Add_exposure(driver,application_type)
-
-wait.until(is_page_loaded)
-
-vehicle_check_xpath ="//p[text()='Vehicle']"
-# WebDriverWait(driver,10).until(EC.presence_of_all_elements_located((By.XPATH,"////p[text()='Vehicle']')]")))
-
-list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,wait,vehicle_check_xpath,json_data_1,dropdown_selection_json,filled_inputs)
-
-wait.until(is_page_loaded)
-
-
-list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,wait,vehicle_check_xpath,json_data_1,dropdown_selection_json,filled_inputs)
-#parameters for Add exposure: driver,application_type,sidebar_link_selection,exposure_dropdown_selection
-# for i in range(5):
-#     Add_exposure(driver,2,1,i+1)
-
-policy_logger(driver)
-
-#button click to lock and price or save or to select other options
-top_container_button_options(driver,2)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# # all the variables are passed into the sequence function through params. Params is dictionary defined in the start of this page.
+# application_type_1(params)
 
 #============================ peril test start =============================================
 # login_to_socotra(driver,test_url)
@@ -171,3 +123,28 @@ top_container_button_options(driver,2)
 #     add_peril_to_webpage(driver,item,times)
 #     times = times+1
 #============================== peril test end =======================================================
+if __name__ =="__main__":        
+    # #login to socotra credintial hardcoded in the function/ credintial to be move to a ENV file
+    login_to_socotra(driver,login_url)
+
+    # # Wait for the page to load
+    wait.until(is_page_loaded)
+    # # time.sleep(2)
+
+    # Create a new policy holder. 
+    create_new(driver,wait, 2,policy_holder_form_locator,field_value_json,dropdown_selection_json,filled_inputs)
+    # # Select the "New Policyholder" option
+    # # new_policyholder_dropdown(driver)
+
+    #circular loader waiting function
+    circular_loader_wait(driver)
+
+    wait.until(is_page_loaded)
+
+    # #product selector application type can be defined in the start of this page.
+    application_type_selector(driver,application_type)
+
+    # all the variables are passed into the sequence function through params. Params is dictionary defined in the start of this page.
+    application_type_1(params)
+
+

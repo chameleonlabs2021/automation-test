@@ -154,7 +154,7 @@ def sidebar_selector(driver,selection):
     except Exception as e:
       print("An error occurred 103:", e)
       
-def Add_exposure(driver,application_type,sidebar_link_selection=1,exposure_selection=1):
+def Add_exposure(driver,application_type,sidebar_link_selection=1,exposure_selection=[1]):
 
     if application_type in[1,4,5,6] :#if application is auto insurance just click add exposure
         sidebar_selector(driver,sidebar_link_selection)
@@ -165,41 +165,42 @@ def Add_exposure(driver,application_type,sidebar_link_selection=1,exposure_selec
         except Exception as e:
             print("An error occurred 114:", e)
     elif application_type in[2,3]:#if application is anything other than auto insurance just click add exposure and select from the list
-        sidebar_selector(driver,sidebar_link_selection)        
-        try:
-            #checking for Add exposure button
-            WebDriverWait(driver,15).until(EC.presence_of_element_located((By.XPATH,"//button[normalize-space(.)='Add Exposure']"))).click()
-            #checking if  new menu dilog is loaded                                
-            WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH,"//div[starts-with(@class,'MuiDialog-container')]/div")))
-            #dropdown menu element selection and click
-            driver.find_element(By.ID,"add-exposure-selector").click()
+        sidebar_selector(driver,sidebar_link_selection)
+        for exposure in exposure_selection:
+            try:
+                #checking for Add exposure button
+                WebDriverWait(driver,15).until(EC.presence_of_element_located((By.XPATH,"//button[normalize-space(.)='Add Exposure']"))).click()
+                #checking if  new menu dilog is loaded                                
+                WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH,"//div[starts-with(@class,'MuiDialog-container')]/div")))
+                #dropdown menu element selection and click
+                driver.find_element(By.ID,"add-exposure-selector").click()
 
-            #checking if the dropdown is activated by checking 5th element of the dropdown
-            dropdown_check = WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH,"//div[starts-with(@class,'react-select__menu-list')]/div[5]")))
-            # selection of the exposure based on exposure_selection parameter
-            exposure_name =driver.find_element(By.XPATH,f"//div[starts-with(@class,'react-select__menu-list')]/div[{exposure_selection}]").get_attribute('innerHTML')
-            link = (f"//div[starts-with(@class,'react-select__menu-list')]/div[{exposure_selection}]")
-            driver.find_element(By.XPATH, link).click()
-            print(f'{exposure_name}- exposure')
-            #select and click the Add button
-            # print("before add button clicking")
-            WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH,"//div[starts-with(@class,'MuiDialog-container')]/div/div[2]/button"))).click()
-            # print("before add progress visible")
-            WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH,"//span[starts-with(@class,'MuiCircularProgress')]")))
-            # print("before add progress invisible")
-            WebDriverWait(driver,10).until(EC.invisibility_of_element_located((By.XPATH,"//span[starts-with(@class,'MuiCircularProgress')]")))
-            # print("before add tostify visible")
-            WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH,"//div[starts-with(@class,'Toastify__toast-container')]/div")))
-            # print("after add tostify visible")
-            # WebDriverWait(driver,10).until(EC.invisibility_of_element_located((By.XPATH,"//div[starts-with(@class,'Toastify')]/div/div/button")))              
-        except IndexError:
-            print("application dropdown selection and submission failed")
-            driver.quit() 
-        except Exception as e:
-            print("An error occurred 142:", e)
-            print("An error occurred:", e)
-            print("Exception type:", type(e))
-            print("Exception args:", e.args)
+                #checking if the dropdown is activated by checking 5th element of the dropdown
+                dropdown_check = WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH,"//div[starts-with(@class,'react-select__menu-list')]/div[5]")))
+                # selection of the exposure based on exposure_selection parameter
+                exposure_name =driver.find_element(By.XPATH,f"//div[starts-with(@class,'react-select__menu-list')]/div[{exposure}]").get_attribute('innerHTML')
+                link = (f"//div[starts-with(@class,'react-select__menu-list')]/div[{exposure}]")
+                driver.find_element(By.XPATH, link).click()
+                print(f'{exposure_name}- exposure')
+                #select and click the Add button
+                # print("before add button clicking")
+                WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH,"//div[starts-with(@class,'MuiDialog-container')]/div/div[2]/button"))).click()
+                # print("before add progress visible")
+                WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH,"//span[starts-with(@class,'MuiCircularProgress')]")))
+                # print("before add progress invisible")
+                WebDriverWait(driver,10).until(EC.invisibility_of_element_located((By.XPATH,"//span[starts-with(@class,'MuiCircularProgress')]")))
+                # print("before add tostify visible")
+                WebDriverWait(driver,10).until(EC.presence_of_element_located((By.XPATH,"//div[starts-with(@class,'Toastify__toast-container')]/div")))
+                # print("after add tostify visible")
+                # WebDriverWait(driver,10).until(EC.invisibility_of_element_located((By.XPATH,"//div[starts-with(@class,'Toastify')]/div/div/button")))              
+            except IndexError:
+                print("application dropdown selection and submission failed")
+                driver.quit() 
+            except Exception as e:
+                print("An error occurred 142:", e)
+                print("An error occurred:", e)
+                print("Exception type:", type(e))
+                print("Exception args:", e.args)
     else:
         print('wrong or nonlisted exposure selection')
 
@@ -295,7 +296,7 @@ def search_and_fill_all_inputs(driver,wait,form_xpath,json_data_1,dropdown_selec
                 else:
                     # print(f'==========>{key}<=========')
                     driver.find_element(By.ID,key).click()
-                    feild_filler(driver,key,field_type,json_data_1,filled_inputs)
+                    field_filler(driver,key,field_type,json_data_1,filled_inputs)
             except:
                 failed_inputs += 1
                 # print(key)
@@ -555,13 +556,13 @@ def dropdown_selector_json(driver,key,dropdown_selection_json, filled_inputs):
             else:
              print(f"{key} dropdown selection data missing in json file")
   
-def feild_filler(driver,key,field_type,json_data_1,filled_inputs):
+def field_filler(driver,key,field_type,json_data_1,filled_inputs):
     # print(key)
     try:
         if field_type == 'text':
             # input_feild = driver.find_element(By.ID,key)
             # input_feild.send_keys(fake.sentence())
-            # print(f"text feild success {key} ")
+            # print(f"text field success {key} ")
             fake_data_based_on_id(driver,key,json_data_1)
             filled_inputs.add(key)  
         elif field_type == "number":
@@ -581,7 +582,7 @@ def feild_filler(driver,key,field_type,json_data_1,filled_inputs):
         #     place_holder = input_feild.get_attribute("placeholder")
         #     print(place_holder)
         #     input_feild.send_keys(random_date.strftime("%Y/%m/%d %I:%M:%S %p"))
-        #     print(f"number feild success {key} ")  
+        #     print(f"number field success {key} ")  
       
     except:
         print(f"Dropdown {key} selection failed")
@@ -928,7 +929,67 @@ def policy_logger(driver):
         print("Policy Id not logged")
         pass
 #======================data creator functions to fill field data end =========================#
-    
+#=========== application sequence setter =====================================================#
+def application_type_1 (params):
+    driver = params.get("driver")
+    wait = params.get("wait")
+    login_url = params.get("login_url")
+    key_policy_form = params.get("key_policy_form")
+    policy_holder_form_locator = params.get("policy_holder_form_locator")
+    field_value_json = params.get("field_value_json")
+    peril_list_json = params.get("peril_list_json")
+    filled_inputs = params.get("filled_inputs")
+    clicked_buttons = params.get("clicked_buttons")
+    expanded_list = params.get("expanded_list")
+    dropdown_selection_json = params.get("dropdown_selection_json")
+    application_type =  params.get("application_type")
+    exposure_selection = params.get("exposure_selection")
+    wait.until(is_page_loaded)
+
+    button_finder(driver,clicked_buttons)
+
+    accordian_expanded(driver,expanded_list)
+
+    list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,wait,key_policy_form,field_value_json,dropdown_selection_json,filled_inputs)
+
+    button_finder(driver,clicked_buttons)
+
+    accordian_expanded(driver,expanded_list)
+
+    list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,wait,key_policy_form,field_value_json,dropdown_selection_json,filled_inputs)
+
+    scroll_back_to = "//div[starts-with(@class,'BodyContainer')]/div"
+    scroll_to_location(driver,'XPATH',scroll_back_to,wait )
+    # # # payment schedule selector
+    payment_Schedule_Selctor(driver,random.randint(1, 2))
+
+
+    Add_exposure(driver,application_type,1,exposure_selection)
+
+    if application_type == 1:
+        try:
+            wait.until(is_page_loaded)
+            vehicle_check_xpath ="//p[text()='Vehicle']"
+            list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,wait,vehicle_check_xpath,field_value_json,dropdown_selection_json,filled_inputs)
+            wait.until(is_page_loaded)
+            list_of_inputs, failed_inputs, multiple_drivers = search_and_fill_all_inputs(driver,wait,vehicle_check_xpath,field_value_json,dropdown_selection_json,filled_inputs)
+            policy_logger(driver)
+            #button click to lock and price or save or to select other options
+            top_container_button_options(driver,2)
+        except:
+            print("vehicle form or policy_logger or top_container_button_options failed")
+            pass
+    else:
+        try:
+            wait.until(is_page_loaded)
+            policy_logger(driver)
+            #button click to lock and price or save or to select other options
+            top_container_button_options(driver,2)
+        except:
+            print(print("policy_logger or top_container_button_options failed"))
+            pass
+
+
 
 
 

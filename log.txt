@@ -392,7 +392,6 @@ Dropdown arrow icon Button ignorned
 Dropdown arrow icon Button ignorned
 Accordion is open.
 Accordion is open.
-Accordion is open.
 react-select-4-input : list
 Vehicle form not loaded
 react-select-4-input input_felid found in ignorelist
@@ -840,105 +839,14 @@ policyForm.building_details.0.iso_protection_class input data push failed:'fake_
 policyForm.building_details.0.iso_protection_class input data push failed:'fake_data_based_on_id'
 policyForm.addl_interests.0.addl_interest_name : None
 Vehicle form not loaded
-policyForm.addl_interests.0.addl_interest_name input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_name input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_name input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_name input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_name input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_name input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_name input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_name input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_name input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_name input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_name input data push failed:'fake_data_based_on_id'
 policyForm.addl_interests.0.addl_interest_email : None
 Vehicle form not loaded
-policyForm.addl_interests.0.addl_interest_email input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_email input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_email input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_email input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_email input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_email input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_email input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_email input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_email input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_email input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_email input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_email input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_email input data push failed:'fake_data_based_on_id'
 policyForm.addl_interests.0.addl_interest_address_line_1 : None
 Vehicle form not loaded
-policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
 policyForm.addl_interests.0.addl_interest_address_line_2 : None
 Vehicle form not loaded
-policyForm.addl_interests.0.addl_interest_address_line_2 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_2 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_2 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_2 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_2 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_2 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_2 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_2 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_2 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_2 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_2 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_2 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_2 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_2 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_2 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_2 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_2 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_2 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_2 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_2 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_2 input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_line_2 input data push failed:'fake_data_based_on_id'
-Dropdown policyForm.addl_interests.0.addl_interest_address_line_2 selection failed
 policyForm.addl_interests.0.addl_interest_address_city : None
 Vehicle form not loaded
-policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
 policyForm.addl_interests.0.addl_interest_address_state : list
 Vehicle form not loaded
 policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.rewritten
@@ -982,62 +890,8 @@ policyForm.addl_interests.0.addl_interest_address_state dropdown selection data 
 policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.auto_renewal_status
 policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
 policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.addl_interests.0.addl_interest_address_state
-policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.building_details.0.address_state
-policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
-policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.non_primary_policy_holders.0.non_primary_relationship
-policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
-policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.drivers.0.driver_license_state
-policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
-policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.drivers.0.driver_designation
-policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
-policyForm.addl_interests.0.addl_interest_address_state <========> react-select-5-input
-policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
-policyForm.addl_interests.0.addl_interest_address_state <========> ofac_outcome
-policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
-policyForm.addl_interests.0.addl_interest_address_state <========> unrepaired_damage
-policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
-policyForm.addl_interests.0.addl_interest_address_state <========> vehicle_type
-policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
-policyForm.addl_interests.0.addl_interest_address_state <========> ownership_indicator
-policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
-policyForm.addl_interests.0.addl_interest_address_state <========> vehicle_plated_state
-policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
-policyForm.addl_interests.0.addl_interest_address_state <========> primary_vehicle_use
-policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
-policyForm.addl_interests.0.addl_interest_address_state <========> body_style
-policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
-policyForm.addl_interests.0.addl_interest_address_state <========> travel_radius
-policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
-policyForm.addl_interests.0.addl_interest_address_state <========> distance_to_work_school
-policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
-policyForm.addl_interests.0.addl_interest_address_state <========> travel_radius_farm
-policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
 policyForm.addl_interests.0.addl_interest_address_zip : None
 Vehicle form not loaded
-policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
-policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
 policyForm.policy_term : None
 Vehicle form not loaded
 policyForm.policy_term input data push failed:'fake_data_based_on_id'
@@ -1932,7 +1786,7 @@ Dropdown arrow icon Button ignorned
 Dropdown arrow icon Button ignorned
 accordion already expanded
 accordion already expanded
-accordion already expanded
+Accordion is open.
 react-select-4-input : list
 Vehicle form not loaded
 react-select-4-input input_felid found in ignorelist
@@ -2053,13 +1907,55 @@ Vehicle form not loaded
 policyForm.building_details.0.iso_protection_class input_felid found in ignorelist
 policyForm.addl_interests.0.addl_interest_name : None
 Vehicle form not loaded
-policyForm.addl_interests.0.addl_interest_name input_felid found in ignorelist
+policyForm.addl_interests.0.addl_interest_name input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_name input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_name input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_name input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_name input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_name input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_name input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_name input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_name input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_name input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_name input data push failed:'fake_data_based_on_id'
 policyForm.addl_interests.0.addl_interest_email : None
 Vehicle form not loaded
-policyForm.addl_interests.0.addl_interest_email input_felid found in ignorelist
+policyForm.addl_interests.0.addl_interest_email input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_email input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_email input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_email input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_email input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_email input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_email input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_email input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_email input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_email input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_email input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_email input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_email input data push failed:'fake_data_based_on_id'
 policyForm.addl_interests.0.addl_interest_address_line_1 : None
 Vehicle form not loaded
-policyForm.addl_interests.0.addl_interest_address_line_1 input_felid found in ignorelist
+policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_line_1 input data push failed:'fake_data_based_on_id'
 policyForm.addl_interests.0.addl_interest_address_line_2 : None
 Vehicle form not loaded
 policyForm.addl_interests.0.addl_interest_address_line_2 input data push failed:'fake_data_based_on_id'
@@ -2087,13 +1983,128 @@ policyForm.addl_interests.0.addl_interest_address_line_2 input data push failed:
 Dropdown policyForm.addl_interests.0.addl_interest_address_line_2 selection failed
 policyForm.addl_interests.0.addl_interest_address_city : None
 Vehicle form not loaded
-policyForm.addl_interests.0.addl_interest_address_city input_felid found in ignorelist
+policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_city input data push failed:'fake_data_based_on_id'
 policyForm.addl_interests.0.addl_interest_address_state : list
 Vehicle form not loaded
-policyForm.addl_interests.0.addl_interest_address_state input_felid found in ignorelist
+policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.rewritten
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.all_peril_deductible
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.has_restricted_dog_breed
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.superior_construction
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.number_of_units_in_building
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.building_code_effectiveness_grade
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.construction_type
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.protective_devices
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.prior_claims
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.items_to_schedule
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.select_field_example
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.channel
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.multiple_drivers
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.10_year_felony_conviction
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.insurance_fraud_conviction
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.atfault_claims_past_5_years
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.run_third_party_reports
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.salesnew
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.salesnew1
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.auto_renewal_status
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.addl_interests.0.addl_interest_address_state
+policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.building_details.0.address_state
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.non_primary_policy_holders.0.non_primary_relationship
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.drivers.0.driver_license_state
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> policyForm.drivers.0.driver_designation
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> react-select-5-input
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> ofac_outcome
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> unrepaired_damage
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> vehicle_type
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> ownership_indicator
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> vehicle_plated_state
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> primary_vehicle_use
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> body_style
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> travel_radius
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> distance_to_work_school
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
+policyForm.addl_interests.0.addl_interest_address_state <========> travel_radius_farm
+policyForm.addl_interests.0.addl_interest_address_state dropdown selection data missing in json file
 policyForm.addl_interests.0.addl_interest_address_zip : None
 Vehicle form not loaded
-policyForm.addl_interests.0.addl_interest_address_zip input_felid found in ignorelist
+policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
+policyForm.addl_interests.0.addl_interest_address_zip input data push failed:'fake_data_based_on_id'
 policyForm.policy_term : None
 Vehicle form not loaded
 policyForm.policy_term input_felid found in ignorelist
@@ -2146,3 +2157,6 @@ policyForm.items_to_schedule : list
 Vehicle form not loaded
 policyForm.items_to_schedule input_felid found in ignorelist
 Default add on coverages- exposure
+Liability- exposure
+Optional property coverages- exposure
+Policy number logged successfully: Policy 100025336
